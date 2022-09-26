@@ -1,0 +1,17 @@
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu116
+      - torch==1.12.*
+      - torchvision==0.13.*
+      - pytorch-lightning[extra]==1.7.*
+      - wandb
+      - black
+      - flake8
+      - isort
+      - pre-commit
+      - jupyterlab
+      - jupyterlab-git
+      - tqdm
+      - seaborn
