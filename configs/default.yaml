@@ -1,0 +1,89 @@
+name: learn-to-dehaze
+state: train # train/test/debug
+seed: 42
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the current log directory,
+# so it's useful to have this path as a special variable
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+work_dir: ${hydra:runtime.cwd}
+
+logging:
+  root: ./logs
+
+dataset:
+  train_list: ${work_dir}/data/its_train.csv
+  val_list: ${work_dir}/data/its_val.csv
+  data_dir: /workspace/datasets/dehaze/ITS/train
+  crop_size: 256
+  batch_size: 64
+  num_workers: 4
+  pin_memory: True
+
+model:
+  sync_dist: True # Use when training with multiple gpu
+  base_channel_nums: 32
+
+  depth_estimator:
+    base_channel_nums: ${model.base_channel_nums}
+    min_d: 1.e-1
+    max_d: 1.e+1
+
+  haze_producer:
+    base_channel_nums: ${model.base_channel_nums}
+    in_channels: 3
+
+  haze_remover:
+    base_channel_nums: ${model.base_channel_nums}
+
+  optimizer:
+    opt_producer:
+      lr: 3.e-4
+      wd: 1.e-4
+    opt_disc:
+      lr: 1.e-5
+      wd: 1.e-4
+    opt_remover:
+      lr: 3.e-4
+      wd: 1.e-4
+
+    # norm_weight_decay: 0.e-0
+  lr_scheduler:
+    monitor: ${model_ckpt.monitor}
+    warmup_epochs: 0
+
+trainer:
+  # GPU related
+  precision: 16
+  gpus: -1
+  num_nodes: 1
+  strategy: ddp
+  benchmark: True
+  sync_batchnorm: False
+
+  # Training related
+  max_steps: 100000
+  # limit_train_batches: 1.0
+  # gradient_clip_val: 0.1 # gradient clipping max norm
+  # gradient_clip_algorithm: "norm"
+
+# Logging, progress bar
+refresh_rate: 10
+
+model_ckpt:
+  dirpath: ckpts/
+  filename: "default-epoch{epoch}-step{step}"
+  monitor: val/PeakSignalNoiseRatio
+  save_last: True
+  save_top_k: 4
+  mode: max
+  auto_insert_metric_name: False
+
+ddp_plugin:
+  # These two args only work with accelerator = "ddp"
+  find_unused_params: True # TODO: Find out why turn this to False will fail to launch the training
+  fp16_hook: True
+
+hydra:
+  run:
+    dir: ./outputs/${name}/${now:%Y-%m-%d-%H-%M-%S}

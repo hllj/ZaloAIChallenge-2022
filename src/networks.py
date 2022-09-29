@@ -16,6 +16,15 @@ from .blocks import (
 )
 
 
+def normalized_tanh(tensor: torch.Tensor) -> torch.Tensor:
+    return 0.5 * tensor.tanh() + 0.5
+
+
+class NormalizedTanh(nn.Tanh):
+    def forward(self, input: torch.Tensor) -> torch.Tensor:
+        return 0.5 + 0.5 * super().forward(input)
+
+
 class BaseNetwork(nn.Module):
     def __init__(self):
         super().__init__()
@@ -60,28 +69,16 @@ class HazeRemovalNet(BaseNetwork):
         self,
         base_channel_nums,
         init_weights=True,
-        path=None,
-        min_beta=0.04,
-        max_beta=0.2,
-        min_d=0.3,
-        max_d=5,
-        use_dc_A=False,
+        path="",
         *args,
         **kwargs,
     ):
         super().__init__()
-        self.transmission_estimator = TransmissionEstimator()
 
         # norm_type = 'batch'
         # act_type = 'leakyrelu'
         # mode = 'CNA'
         use_spectral_norm = False
-
-        self.MIN_BETA = min_beta
-        self.MAX_BETA = max_beta
-        self.MIN_D = min_d
-        self.MAX_D = max_d
-        self.use_dc_A = True if use_dc_A == 1 else False
 
         backbone = "efficientnet_lite3"
         exportable = True
@@ -166,7 +163,7 @@ class HazeRemovalNet(BaseNetwork):
         )
 
         self.avg_pool = nn.AdaptiveAvgPool2d(output_size=[1, 1])
-        self.final_conv_beta_1 = conv_block(
+        self.final_conv_A_1 = conv_block(
             in_nc=32 + 48 + 136 + 384,
             out_nc=2 * base_channel_nums,
             kernel_size=1,
@@ -174,7 +171,7 @@ class HazeRemovalNet(BaseNetwork):
             norm_type=None,
             use_spectral_norm=use_spectral_norm,
         )
-        self.final_conv_beta_2 = conv_block(
+        self.final_conv_A_2 = conv_block(
             in_nc=2 * base_channel_nums,
             out_nc=1,
             kernel_size=1,
@@ -190,30 +187,21 @@ class HazeRemovalNet(BaseNetwork):
             use_pretrained, exportable=exportable
         )
 
-    def forward_get_A(self, x):  # output A: N,3,1,1
-        if self.use_dc_A:
-            A = self.transmission_estimator.get_atmosphere_light_new(x)
-        else:
-            A = x.max(dim=3)[0].max(dim=2, keepdim=True)[0].unsqueeze(3)
-
-        return A
-
-    def forward(self, x_0, require_paras=False, use_guided_filter=False):
-
+    def forward(self, x_0):
         layer_1 = self.pretrained.layer1(x_0)
         layer_2 = self.pretrained.layer2(layer_1)
         layer_3 = self.pretrained.layer3(layer_2)
         layer_4 = self.pretrained.layer4(layer_3)
 
-        layer_1_beta = F.adaptive_avg_pool2d(layer_1, [1, 1]).detach()
-        layer_2_beta = F.adaptive_avg_pool2d(layer_2, [1, 1]).detach()
-        layer_3_beta = F.adaptive_avg_pool2d(layer_3, [1, 1]).detach()
-        layer_4_beta = F.adaptive_avg_pool2d(layer_4, [1, 1]).detach()
+        layer_1_A = F.adaptive_avg_pool2d(layer_1, [1, 1]).detach()
+        layer_2_A = F.adaptive_avg_pool2d(layer_2, [1, 1]).detach()
+        layer_3_A = F.adaptive_avg_pool2d(layer_3, [1, 1]).detach()
+        layer_4_A = F.adaptive_avg_pool2d(layer_4, [1, 1]).detach()
 
-        beta = self.final_conv_beta_1(
-            torch.cat([layer_1_beta, layer_2_beta, layer_3_beta, layer_4_beta], dim=1)
+        A = self.final_conv_A_1(
+            torch.cat([layer_1_A, layer_2_A, layer_3_A, layer_4_A], dim=1)
         )
-        beta = self.final_conv_beta_2(beta)
+        A = self.final_conv_A_2(A)
 
         layer_1_rn = self.scratch.layer1_rn(layer_1)
         layer_2_rn = self.scratch.layer2_rn(layer_2)
@@ -221,30 +209,15 @@ class HazeRemovalNet(BaseNetwork):
         layer_4_rn = self.scratch.layer4_rn(layer_4)
 
         path_4 = self.scratch.refinenet4(layer_4_rn)
-
         path_3 = self.scratch.refinenet3(path_4, layer_3_rn)
         path_2 = self.scratch.refinenet2(path_3, layer_2_rn)
         path_1 = self.scratch.refinenet1(path_2, layer_1_rn)
 
         t = self.scratch.output_conv(path_1)
-
-        beta = (
-            self.MIN_BETA + (self.MAX_BETA - self.MIN_BETA) * (torch.tanh(beta) + 1) / 2
-        )
-
         t = (torch.tanh(t) + 1) / 2
-        t = t.clamp(0.05, 0.95)
+        t = t.clamp(0.05, 1.0)
 
-        if use_guided_filter:
-            t = self.transmission_estimator.get_refined_transmission(x_0, t)
-
-        A = self.forward_get_A(x_0)
-        d = torch.log(t) / (-beta)
-
-        if require_paras:
-            return ((x_0 - A) / t + A).clamp(0, 1), d, beta
-        else:
-            return ((x_0 - A) / t + A).clamp(0, 1), t
+        return ((x_0 - A) / t + A).clamp(0, 1)
 
 
 class HazeProduceNet(BaseNetwork):
@@ -357,37 +330,40 @@ class HazeProduceNet(BaseNetwork):
 
         self.fc = nn.Sequential(
             nn.AdaptiveMaxPool2d(output_size=7),
-            nn.Linear(4 * base_channel_nums * 7, 4),
-            nn.ReLU(),
+            nn.Flatten(),
+            nn.Linear(4 * base_channel_nums * 7 * 7, 4),
         )
 
         if init_weights:
             self.init_weights("xaiver")
 
     def forward(self, x, d):
-        x0 = (x - 0.5) * 2
+        B = x.size(0)
+        x0 = x
+
         x = self.conv0(x)
         x = self.pool0(x)
-        x1 = self.conv1(x)
-        x1 = self.pool1(x1)
-        x2 = self.conv2(x1)
-        x2 = self.pool2(x2)
-        x3 = self.conv3(x2)
-        x3 = self.pool3(x3)
+        x = self.conv1(x)
+        x = self.pool1(x)
+        x = self.conv2(x)
+        x = self.pool2(x)
+        x = self.conv3(x)
+        x = self.pool3(x)
 
-        x = self.bottleneck1(x3)
+        x = self.bottleneck1(x)
         x = self.bottleneck2(x)
         x = self.bottleneck3(x)
         x = self.bottleneck4(x)
+        x = self.fc(x)  # [B, 4]
+        x = x.view(B, -1, 1, 1)
 
-        x = torch.tanh(x)
-        x = ((x0 + x).clamp(-1, 1) + 1) / 2
+        A, beta = torch.split(x, [3, 1], dim=1)
+        A = normalized_tanh(A)
+        beta = F.relu6(beta)
 
-        A = x.max(dim=3)[0].max(dim=2, keepdim=True)[0].unsqueeze(3)
-        # t = torch.exp(-d * beta)
-        t = d
-        x = t * x + A * (1 - t)
-        return x
+        t = torch.exp(-d * beta).clamp(0.05, 1.0)
+        x = t * x0 + A * (1 - t)
+        return x.clamp(0, 1)
 
 
 class DepthEstimationNet(BaseNetwork):
@@ -396,7 +372,7 @@ class DepthEstimationNet(BaseNetwork):
         base_channel_nums=48,
         min_d=0.3,
         max_d=10,
-        path=None,
+        path="",
         init_weights=True,
         *args,
         **kwargs,
@@ -511,7 +487,7 @@ class DepthEstimationNet(BaseNetwork):
         path_1 = self.scratch.refinenet1(path_2, layer_1_rn)
 
         out = self.scratch.output_conv(path_1)
-        out = (torch.tanh(out) + 1) / 2
+        out = normalized_tanh(out)
         out = self.MIN_D + out * (self.MAX_D - self.MIN_D)
 
         return out
@@ -1007,7 +983,7 @@ class Discriminator(BaseNetwork):
 
         outputs = conv5
         if self.use_sigmoid:
-            outputs = torch.sigmoid(conv5)
+            outputs = normalized_tanh(conv5)
 
         return outputs, [conv1, conv2, conv3, conv4, conv5]
 

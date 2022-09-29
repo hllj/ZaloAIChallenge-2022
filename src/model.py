@@ -1,47 +1,131 @@
-from typing import Any
-
 import torch
 import torch.nn as nn
-
-# import torch.nn.functional as F
 from pytorch_lightning import LightningModule
 from torch.optim.optimizer import Optimizer
+from torchmetrics import (
+    MetricCollection,
+    PeakSignalNoiseRatio,
+    StructuralSimilarityIndexMeasure,
+)
 
 from .loss import AdversarialLoss
 from .networks import DepthEstimationNet, Discriminator, HazeProduceNet, HazeRemovalNet
 
 
 class Model(LightningModule):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(self, config) -> None:
+        super().__init__()
 
-        self.l2_loss = nn.MSELoss()
+        self.save_hyperparameters(config)
+
         self.l1_loss = nn.L1Loss()
         self.adversarial_loss = AdversarialLoss(type="lsgan")
 
-        self.depth_estimator = DepthEstimationNet(*args, **kwargs)
-        self.haze_producer = HazeProduceNet(*args, **kwargs)
-        self.haze_remover = HazeRemovalNet(*args, **kwargs)
+        self.depth_estimator = DepthEstimationNet(**self.hparams.depth_estimator)
+        self.haze_producer = HazeProduceNet(**self.hparams.haze_producer)
+        self.haze_remover = HazeRemovalNet(**self.hparams.haze_remover)
         self.discriminator = Discriminator(
             in_channels=3, use_spectral_norm=True, use_sigmoid=True
         )
 
-        self.save_hyperparameters()
+        metric_collection = MetricCollection(
+            [
+                PeakSignalNoiseRatio(data_range=1.0),
+                StructuralSimilarityIndexMeasure(),
+            ],
+        )
+        self.train_metrics = metric_collection.clone("train/")
+        self.val_metrics = metric_collection.clone("val/")
 
-    def step(self, batch, batch_idx):
-        pass
-        # cleaned, hazed = batch
-        # d_tilde = self.depth_estimator(cleaned)
-        # beta_tilde = self.depth_estimator()
+        self.automatic_optimization = False
 
-    def training_step(self, batch, batch_idx) -> torch.Tensor:
-        return super().training_step(batch, batch_idx)
+    def training_step(self, batch, batch_idx) -> None:
+        # FIXME: OOM after a certain amoun of time when start the training
+        opt_producer, opt_disc, opt_remover = self.optimizers()
+        cleaned, hazed = batch  # Unpaired
+
+        d_tilde = self.depth_estimator(cleaned)
+        hazed_synth = self.haze_producer(cleaned, d_tilde)
+
+        ##########################
+        # Optimize Discriminator #
+        ##########################
+        d_real, _ = self.discriminator(hazed)
+        errD_real = self.adversarial_loss(d_real, is_disc=True, is_real=True)
+
+        d_fake, _ = self.discriminator(hazed_synth.detach())
+        errD_fake = self.adversarial_loss(d_fake, is_disc=True, is_real=True)
+
+        errD = errD_real + errD_fake
+
+        opt_disc.zero_grad()
+        self.manual_backward(errD)
+        opt_disc.step()
+
+        #####################
+        # Optimize Producer #
+        #####################
+        d_fake, _ = self.discriminator(hazed_synth)
+        errP_disc = -self.adversarial_loss(d_fake, is_disc=False, is_real=False)
+        cleaned_hat = self.haze_remover(hazed_synth)
+        errP_recon = self.l1_loss(cleaned_hat, cleaned)  # We want to maximize this one
+        errP = errP_disc + errP_recon
+
+        opt_producer.zero_grad()
+        self.manual_backward(errP)
+        opt_producer.step()
+
+        ####################
+        # Optimize Remover #
+        ####################
+        cleaned_hat = self.haze_remover(hazed_synth.detach())
+        errR = self.l1_loss(cleaned_hat, cleaned)
+        opt_remover.zero_grad()
+        self.manual_backward(errR)
+        opt_remover.step()
+
+        # Metrics calculation
+        metric_dict = self.train_metrics(cleaned_hat, cleaned)
+
+        self.log_dict(
+            {"producer_loss": errP, "remover_loss": errR, "disciminator_loss": errD},
+            prog_bar=True,
+            sync_dist=self.hparams.sync_dist,
+        )
+        self.log_dict(metric_dict, sync_dist=self.hparams.sync_dist)
 
     def validation_step(self, batch, batch_idx) -> None:
-        return super().validation_step(batch, batch_idx)
+        cleaned, hazed = batch
+        cleaned_hat = self.haze_remover(hazed)
+        metric_dict = self.val_metrics(cleaned_hat, cleaned)
+        self.log_dict(metric_dict, prog_bar=True, sync_dist=self.hparams.sync_dist)
+
+        return cleaned_hat
 
     def test_step(self, batch, batch_idx) -> None:
-        return super().test_step(batch, batch_idx)
+        raise NotImplementedError
+
+    def configure_optimizers(self):
+        opt_producer = torch.optim.AdamW(
+            [
+                {"params": self.depth_estimator.parameters()},
+                {"params": self.haze_producer.parameters()},
+            ],
+            lr=self.hparams.optimizer.opt_producer.lr,
+            weight_decay=self.hparams.optimizer.opt_producer.wd,
+            maximize=True,
+        )
+        opt_disc = torch.optim.AdamW(
+            self.discriminator.parameters(),
+            lr=self.hparams.optimizer.opt_disc.lr,
+            weight_decay=self.hparams.optimizer.opt_disc.wd,
+        )
+        opt_remover = torch.optim.AdamW(
+            self.haze_remover.parameters(),
+            lr=self.hparams.optimizer.opt_remover.lr,
+            weight_decay=self.hparams.optimizer.opt_remover.wd,
+        )
+        return opt_producer, opt_disc, opt_remover
 
     def optimizer_zero_grad(
         self, epoch: int, batch_idx: int, optimizer: Optimizer, optimizer_idx: int

@@ -5,13 +5,19 @@ dependencies:
       - --extra-index-url https://download.pytorch.org/whl/cu116
       - torch==1.12.*
       - torchvision==0.13.*
-      - pytorch-lightning[extra]==1.7.*
+      - pytorch-lightning==1.7.*
+      - torchmetrics[image]
       - wandb
+      - hydra-core==1.1.0
+      - hydra-colorlog==1.1.0
+      - hydra-optuna-sweeper==1.1.0
       - black
       - flake8
       - isort
       - pre-commit
       - jupyterlab
       - jupyterlab-git
+      - rich
       - tqdm
+      - numpy
       - seaborn
