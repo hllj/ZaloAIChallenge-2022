@@ -15,7 +15,7 @@ class Model(LightningModule):
         self.save_hyperparameters(config)
 
         self.l1_loss = nn.L1Loss()
-        self.adversarial_loss = AdversarialLoss(type="lsgan")
+        self.adversarial_loss = AdversarialLoss(type="hinge")
 
         self.depth_estimator = DepthEstimationNet(**self.hparams.depth_estimator)
         self.haze_producer = HazeProduceNet(**self.hparams.haze_producer)
@@ -51,7 +51,7 @@ class Model(LightningModule):
         d_fake, _ = self.discriminator(hazed_synth.detach())
         errD_fake = self.adversarial_loss(d_fake, is_disc=True, is_real=False)
 
-        errD = errD_real + errD_fake
+        errD = 0.5 * (errD_real + errD_fake)
 
         opt_disc.zero_grad()
         self.manual_backward(errD)
@@ -66,7 +66,7 @@ class Model(LightningModule):
         cleaned_hat = self.haze_remover(hazed_synth)
         errP_recon = -self.l1_loss(cleaned_hat, cleaned)  # We want to maximize this one
 
-        errP = errP_gen + errP_recon
+        errP = 0.5 * (errP_gen + errP_recon)
 
         opt_producer.zero_grad()
         self.manual_backward(errP)
