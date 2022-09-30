@@ -14,10 +14,10 @@ logging:
 dataset:
   train_list: ${work_dir}/data/its_train.csv
   val_list: ${work_dir}/data/its_val.csv
-  data_dir: /workspace/datasets/dehaze/ITS/train
+  data_dir: /home/ubuntu/ITS/
   crop_size: 256
-  batch_size: 64
-  num_workers: 4
+  batch_size: 128
+  num_workers: 8
   pin_memory: True
 
 model:
@@ -55,7 +55,8 @@ model:
 trainer:
   # GPU related
   precision: 16
-  gpus: -1
+  accelerator: gpu
+  devices: -1
   num_nodes: 1
   strategy: ddp
   benchmark: True
@@ -81,8 +82,9 @@ model_ckpt:
 
 ddp_plugin:
   # These two args only work with accelerator = "ddp"
-  find_unused_params: True # TODO: Find out why turn this to False will fail to launch the training
+  find_unused_params: True # FIXME: Find out why turn this to False will fail to launch the training
   fp16_hook: True
+  static_graph: False
 
 hydra:
   run:

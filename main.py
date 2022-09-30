@@ -8,7 +8,7 @@ import wandb
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.callbacks import Callback, ModelCheckpoint, RichProgressBar
 from pytorch_lightning.loggers import WandbLogger
-from pytorch_lightning.plugins import DDPPlugin
+from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
 
 from src.dataset import DehazeDatamodule
@@ -86,25 +86,26 @@ def train(config):
     OmegaConf.set_struct(config, False)
     strategy = config.trainer.pop("strategy", None)
     OmegaConf.set_struct(config, True)
-    if strategy == "ddp":
+    if strategy == "ddp" and config.trainer.accelerator == "gpu":
         # When using a single GPU per process and per
         # DistributedDataParallel, we need to divide the batch size
         # ourselves based on the total number of GPUs we have
 
         # TODO: Currently only handles gpus = -1 or an int number
-        if config.trainer.gpus == -1:
-            config.trainer.gpus = torch.cuda.device_count()
+        if config.trainer.devices == -1:
+            config.trainer.devices = torch.cuda.device_count()
 
         num_nodes = getattr(config.trainer, "num_nodes", 1)
-        total_gpus = max(1, config.trainer.gpus * num_nodes)
+        total_gpus = max(1, config.trainer.devices * num_nodes)
         config.dataset.batch_size = int(config.dataset.batch_size / total_gpus)
         config.dataset.num_workers = int(config.dataset.num_workers / total_gpus)
-        strategy = DDPPlugin(
+        strategy = DDPStrategy(
             find_unused_parameters=config.ddp_plugin.find_unused_params,
             gradient_as_bucket_view=True,
             ddp_comm_hook=default.fp16_compress_hook
             if config.ddp_plugin.fp16_hook
             else None,
+            static_graph=config.ddp_plugin.static_graph,
         )
 
     model = Model(config.model)

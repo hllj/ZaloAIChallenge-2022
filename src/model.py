@@ -2,11 +2,7 @@ import torch
 import torch.nn as nn
 from pytorch_lightning import LightningModule
 from torch.optim.optimizer import Optimizer
-from torchmetrics import (
-    MetricCollection,
-    PeakSignalNoiseRatio,
-    StructuralSimilarityIndexMeasure,
-)
+from torchmetrics import MetricCollection, PeakSignalNoiseRatio
 
 from .loss import AdversarialLoss
 from .networks import DepthEstimationNet, Discriminator, HazeProduceNet, HazeRemovalNet
@@ -31,7 +27,7 @@ class Model(LightningModule):
         metric_collection = MetricCollection(
             [
                 PeakSignalNoiseRatio(data_range=1.0),
-                StructuralSimilarityIndexMeasure(),
+                # Using SSIM will cause OOM
             ],
         )
         self.train_metrics = metric_collection.clone("train/")
@@ -40,7 +36,6 @@ class Model(LightningModule):
         self.automatic_optimization = False
 
     def training_step(self, batch, batch_idx) -> None:
-        # FIXME: OOM after a certain amoun of time when start the training
         opt_producer, opt_disc, opt_remover = self.optimizers()
         cleaned, hazed = batch  # Unpaired
 
@@ -54,7 +49,7 @@ class Model(LightningModule):
         errD_real = self.adversarial_loss(d_real, is_disc=True, is_real=True)
 
         d_fake, _ = self.discriminator(hazed_synth.detach())
-        errD_fake = self.adversarial_loss(d_fake, is_disc=True, is_real=True)
+        errD_fake = self.adversarial_loss(d_fake, is_disc=True, is_real=False)
 
         errD = errD_real + errD_fake
 
@@ -66,10 +61,12 @@ class Model(LightningModule):
         # Optimize Producer #
         #####################
         d_fake, _ = self.discriminator(hazed_synth)
-        errP_disc = -self.adversarial_loss(d_fake, is_disc=False, is_real=False)
+        errP_gen = self.adversarial_loss(d_fake, is_disc=False, is_real=False)
+
         cleaned_hat = self.haze_remover(hazed_synth)
-        errP_recon = self.l1_loss(cleaned_hat, cleaned)  # We want to maximize this one
-        errP = errP_disc + errP_recon
+        errP_recon = -self.l1_loss(cleaned_hat, cleaned)  # We want to maximize this one
+
+        errP = errP_gen + errP_recon
 
         opt_producer.zero_grad()
         self.manual_backward(errP)
@@ -80,6 +77,7 @@ class Model(LightningModule):
         ####################
         cleaned_hat = self.haze_remover(hazed_synth.detach())
         errR = self.l1_loss(cleaned_hat, cleaned)
+
         opt_remover.zero_grad()
         self.manual_backward(errR)
         opt_remover.step()
@@ -88,9 +86,19 @@ class Model(LightningModule):
         metric_dict = self.train_metrics(cleaned_hat, cleaned)
 
         self.log_dict(
-            {"producer_loss": errP, "remover_loss": errR, "disciminator_loss": errD},
+            {
+                "train/producer_loss": errP,
+                "train/remover_loss": errR,
+                "train/discriminator_loss": errD,
+            },
             prog_bar=True,
             sync_dist=self.hparams.sync_dist,
+        )
+        metric_dict.update(
+            {
+                "train/producer_reconstruction_loss": errP_recon,
+                "train/producer_generator_loss": errP_gen,
+            }
         )
         self.log_dict(metric_dict, sync_dist=self.hparams.sync_dist)
 
@@ -113,7 +121,6 @@ class Model(LightningModule):
             ],
             lr=self.hparams.optimizer.opt_producer.lr,
             weight_decay=self.hparams.optimizer.opt_producer.wd,
-            maximize=True,
         )
         opt_disc = torch.optim.AdamW(
             self.discriminator.parameters(),
