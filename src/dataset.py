@@ -83,6 +83,6 @@ class DehazeDatamodule(LightningDataModule):
             batch_size=self.config.batch_size,
             shuffle=False,
             num_workers=self.config.num_workers,
-            pin_memory=True,
+            pin_memory=self.config.pin_memory,
             drop_last=False,
         )
