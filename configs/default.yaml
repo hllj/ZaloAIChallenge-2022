@@ -14,10 +14,10 @@ logging:
 dataset:
   train_list: ${work_dir}/data/its_train.csv
   val_list: ${work_dir}/data/its_val.csv
-  data_dir: /home/ubuntu/ITS/
+  data_dir: /workspace/datasets/dehaze/ITS
   crop_size: 256
-  batch_size: 128
-  num_workers: 8
+  batch_size: 32
+  num_workers: 4
   pin_memory: True
 
 model:
@@ -58,7 +58,7 @@ trainer:
   accelerator: gpu
   devices: -1
   num_nodes: 1
-  strategy: ddp
+  strategy: null
   benchmark: True
   sync_batchnorm: False
 

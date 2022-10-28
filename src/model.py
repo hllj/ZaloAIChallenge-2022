@@ -7,6 +7,8 @@ from torchmetrics import MetricCollection, PeakSignalNoiseRatio
 from .loss import AdversarialLoss
 from .networks import DepthEstimationNet, Discriminator, HazeProduceNet, HazeRemovalNet
 
+# from torchvision.models import VGG11_Weights, vgg11
+
 
 class Model(LightningModule):
     def __init__(self, config) -> None:
@@ -15,13 +17,17 @@ class Model(LightningModule):
         self.save_hyperparameters(config)
 
         self.l1_loss = nn.L1Loss()
-        self.adversarial_loss = AdversarialLoss(type="hinge")
+        self.l2_loss = nn.MSELoss()
+        self.adversarial_loss = AdversarialLoss(loss_type="wgan-gp")
 
         self.depth_estimator = DepthEstimationNet(**self.hparams.depth_estimator)
         self.haze_producer = HazeProduceNet(**self.hparams.haze_producer)
+        # self.loss_estimator = vgg11(weights=VGG11_Weights.DEFAULT)
+        # self.loss_estimator.classifier[-1] = nn.Linear(4096, 1)
+        # self.loss_estimator.classifier.append(nn.ReLU(True))
         self.haze_remover = HazeRemovalNet(**self.hparams.haze_remover)
         self.discriminator = Discriminator(
-            in_channels=3, use_spectral_norm=True, use_sigmoid=True
+            in_channels=3, use_spectral_norm=True, use_sigmoid=False
         )
 
         metric_collection = MetricCollection(
@@ -46,22 +52,25 @@ class Model(LightningModule):
         # Optimize Discriminator #
         ##########################
         d_real, _ = self.discriminator(hazed)
-        errD_real = self.adversarial_loss(d_real, is_disc=True, is_real=True)
-
         d_fake, _ = self.discriminator(hazed_synth.detach())
-        errD_fake = self.adversarial_loss(d_fake, is_disc=True, is_real=False)
-
-        errD = 0.5 * (errD_real + errD_fake)
+        errD = self.adversarial_loss(
+            d_real=d_real,
+            d_fake=d_fake,
+            discriminator=self.discriminator,
+            real_samples=hazed,
+            fake_samples=hazed_synth,
+            is_disc=True,
+        )
 
         opt_disc.zero_grad()
-        self.manual_backward(errD)
+        self.manual_backward(errD, retain_graph=True)
         opt_disc.step()
 
         #####################
         # Optimize Producer #
         #####################
         d_fake, _ = self.discriminator(hazed_synth)
-        errP_gen = self.adversarial_loss(d_fake, is_disc=False, is_real=False)
+        errP_gen = self.adversarial_loss(d_fake=d_fake, is_disc=False)
 
         cleaned_hat = self.haze_remover(hazed_synth)
         errP_recon = -self.l1_loss(cleaned_hat, cleaned)  # We want to maximize this one
@@ -101,6 +110,10 @@ class Model(LightningModule):
             }
         )
         self.log_dict(metric_dict, sync_dist=self.hparams.sync_dist)
+        return {
+            "cleaned_hat": cleaned_hat,
+            "hazed_synth": hazed_synth,
+        }
 
     def validation_step(self, batch, batch_idx) -> None:
         cleaned, hazed = batch

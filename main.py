@@ -30,6 +30,24 @@ class LogPredictionSamplesCallback(Callback):
         self.wandb_logger: WandbLogger = wandb_logger
         self.samples = samples
 
+    def on_train_batch_end(self, trainer, pl_module, outputs, batch, batch_idx):
+        if batch_idx == 0:
+            n = self.samples
+            cleaned, _ = batch
+            cleaned_hat, hazed_synth = outputs["cleaned_hat"], outputs["hazed_synth"]
+            images = [
+                torch.cat([hazed_inp, cleaned_pred, cleaned_gt], dim=-1)
+                for hazed_inp, cleaned_pred, cleaned_gt in zip(
+                    hazed_synth[:n], cleaned_hat[:n], cleaned[:n]
+                )
+            ]
+            captions = ["Inp - Pred - GT"] * n
+
+            # Option 1: log images with `WandbLogger.log_image`
+            self.wandb_logger.log_image(
+                key="train/visualization", images=images, caption=captions
+            )
+
     def on_validation_batch_end(
         self, trainer, pl_module, outputs, batch, batch_idx, dataloader_idx
     ):
