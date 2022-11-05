@@ -45,6 +45,24 @@ The main file for running the process you have just defined above. We use hydra 
 #### configs/$your_config_name.yaml$ ####
 Define the variables you need for running your model, including your model's hyperparams, dataset's hyperparams, optimizations, etc ... 
 
+#### Add Zalo AI Challenge Dataset
+
+Download train.zip and public.zip, place in data/
+
+Run command to extract frames and split data
+
+```bash
+cd data/
+unzip train.zip
+unzip public.zip
+python get_frame.py -i train/videos/ -o train/images/
+python get_frame.py -i public/videos/ -o public/videos/
+python create_data -dir train/ -l label.csv
+```
+
+train_list: data/train/train.csv
+val_list: data/train/val.csv
+
 ## Running ##
 
 ```bash
