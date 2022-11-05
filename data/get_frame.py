@@ -1,7 +1,9 @@
+import argparse
+import os
+
 import cv2
 import numpy as np
-import os
-import argparse
+
 
 def read_video(name):
     cap = cv2.VideoCapture(name)
@@ -20,15 +22,15 @@ def read_video(name):
         else:
             break
 
-    
     # When everything done, release the video capture object
     cap.release()
     return frames
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description = 'Extract 1 frame/sec')
-    parser.add_argument('-i', '--input', default='train/videos')
-    parser.add_argument('-o', '--output', default='train/images')
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Extract 1 frame/sec")
+    parser.add_argument("-i", "--input", default="train/videos")
+    parser.add_argument("-o", "--output", default="train/images")
     args = parser.parse_args()
     input_dir = args.input
     output_dir = args.output
@@ -36,14 +38,14 @@ if __name__ == '__main__':
         os.mkdir(output_dir)
     filenames = os.listdir(input_dir)
     for idx, filename in enumerate(filenames):
-        filepath = os.path.join(input_dir,filename)
+        filepath = os.path.join(input_dir, filename)
         print(idx, filepath)
         name, file_extension = os.path.splitext(filename)
-        
+
         frames = read_video(filepath)
-        output = os.path.join(output_dir,name)
+        output = os.path.join(output_dir, name)
         if not os.path.exists(output):
             os.mkdir(output)
-        
+
         for idx, frame in enumerate(frames):
-            cv2.imwrite(os.path.join(output, str(idx) + '.jpg'), frame)
+            cv2.imwrite(os.path.join(output, str(idx) + ".jpg"), frame)

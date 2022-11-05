@@ -1,8 +1,8 @@
-from pathlib import Path
 import os
+from pathlib import Path
 
-import torch
 import pandas as pd
+import torch
 import torchvision.transforms as tvf
 from PIL import Image
 from pytorch_lightning import LightningDataModule
@@ -10,22 +10,20 @@ from torch.utils.data import DataLoader, Dataset
 
 
 class LivenessDataset(Dataset):
-    def __init__(
-        self, data_list, data_dir, augment=True, crop_size=256
-    ) -> None:
+    def __init__(self, data_list, data_dir, augment=True, crop_size=256) -> None:
         super().__init__()
         self.data_dir = Path(data_dir)
         df = pd.read_csv(data_list)
         self.paths = df.iloc[:, 0]
         self.labels = list(map(str, df.iloc[:, 1]))
-        
+
         self.input_size = crop_size
         self.transforms = get_image_transforms(self.input_size, augment)
 
     def __getitem__(self, index):
         img_path = os.path.join(self.data_dir, self.paths[index])
         image = Image.open(img_path)
-        if self.transforms != None:
+        if self.transforms is not None:
             image = self.transforms(image)
 
         label = torch.tensor(int(self.labels[index]))
@@ -38,7 +36,7 @@ class LivenessDataset(Dataset):
 class LivenessDatamodule(LightningDataModule):
     def __init__(self, config) -> None:
         super().__init__()
-        print('check', config['train_list'])
+        print("check", config["train_list"])
         self.config = config
 
     def setup(self, stage=None) -> None:
@@ -75,17 +73,14 @@ class LivenessDatamodule(LightningDataModule):
             drop_last=False,
         )
 
+
 def get_image_transforms(input_size, augment):
-    transforms = [
-        tvf.Resize([input_size, input_size])
-    ]
+    transforms = [tvf.Resize([input_size, input_size])]
     if augment:
-        transforms += [
-            tvf.RandomHorizontalFlip()
-        ]
+        transforms += [tvf.RandomHorizontalFlip()]
     transforms += [
         tvf.ToTensor(),
-        tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ]
     transforms = tvf.Compose(transforms)
     return transforms

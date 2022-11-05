@@ -74,6 +74,7 @@ class LogPredictionSamplesCallback(Callback):
                 key="val/visualization", images=images, caption=captions
             )
 
+
 def train(config):
     config.seed = pl.seed_everything(seed=config.seed, workers=True)
 
