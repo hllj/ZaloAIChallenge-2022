@@ -18,7 +18,6 @@ commands:
           command: |
             conda init bash
             source ~/.bashrc
-            conda activate calculator
             conda env create -n my_env -f environment.yml
             conda activate my_env
             pre-commit install
