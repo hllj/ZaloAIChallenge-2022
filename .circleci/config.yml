@@ -1,0 +1,45 @@
+version: 2.1
+
+# orbs:
+#   coverage-reporter: codacy/coverage-reporter@11.10.0
+
+executors:
+  python-docker:
+    docker:
+      - image: cimg/python:3.10
+    resource_class: medium
+
+commands:
+  setup_precommit:
+    steps:
+      - checkout
+      - run:
+          name: "Install package"
+          command: |
+            conda env create -n my_env -f environment.yml
+            conda activate my_env
+            pre-commit install
+      - run:
+          name: "Run pre-commit sentiment analysis"
+          command: |
+            pre-commit run --all-files
+      # - coverage-reporter/send_report:
+      #     coverage-reports: 'coverage.xml'
+      #     project-token: $CODACY_PROJECT_TOKEN
+
+jobs:
+  run_pre-commit: # this can be any name you choose
+    executor: python-docker # use the default executor defined within the orb
+    # filters:
+    #   branches:
+    #     only:
+    #       - setup-circleci
+    steps:
+      - setup_precommit
+
+workflows:
+  # Name the workflow "welcome"
+  main:
+    # Run the welcome/run job in its own container
+    jobs:
+      - run_pre-commit
