@@ -21,10 +21,11 @@ commands:
             conda env create -n my_env -f environment.yml
             source activate my_env
             pre-commit install
-      - run:
-          name: "Run pre-commit sentiment analysis"
-          command: |
             pre-commit run --all-files
+      # - run:
+      #     name: "Run pre-commit sentiment analysis"
+      #     command: |
+      #       pre-commit run --all-files
       # - coverage-reporter/send_report:
       #     coverage-reports: 'coverage.xml'
       #     project-token: $CODACY_PROJECT_TOKEN
