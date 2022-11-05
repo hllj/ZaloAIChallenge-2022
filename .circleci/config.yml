@@ -18,6 +18,7 @@ commands:
           command: |
             conda init bash
             source ~/.bashrc
+            conda activate calculator
             conda env create -n my_env -f environment.yml
             conda activate my_env
             pre-commit install
@@ -31,7 +32,7 @@ commands:
 
 jobs:
   run_pre-commit: # this can be any name you choose
-    executor: conda executor # use the default executor defined within the orb
+    executor: python-docker # use the default executor defined within the orb
     # filters:
     #   branches:
     #     only:
