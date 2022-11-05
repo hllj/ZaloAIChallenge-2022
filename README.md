@@ -31,7 +31,7 @@ One best practice is creating a subfolder inside **src** for every model you wan
 Basically, a model needs at least 3 correspond files: **dataset.py**, **model.py**, **networks.py**.
 
 #### src/dataset.py ####
-This file helps define your dataset and dataloader
+This file helps define your dataset and dataloader.
 
 #### src/model.py ####
 Put your codes relating to your training and testing step here, including define your model, loss function, optimizer and so on.
