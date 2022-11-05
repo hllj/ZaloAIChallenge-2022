@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 import pandas as pd
 import torchvision.transforms as tvf
@@ -7,67 +8,53 @@ from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset
 
 
-class DehazeDataset(Dataset):
+class LivenessDataset(Dataset):
     def __init__(
-        self, data_list, data_dir, unpaired=True, augment=True, crop_size=256
+        self, data_list, data_dir, augment=True, crop_size=256
     ) -> None:
         super().__init__()
-
-        self.data_list = pd.read_csv(data_list)
         self.data_dir = Path(data_dir)
-        self.unpaired = unpaired
+        df = pd.read_csv(data_list)
+        self.paths = df.iloc[:, 0]
+        self.labels = list(map(str, df.iloc[:, 1]))
+        
         self.input_size = crop_size
-
-        self.transforms = []
-        self.transforms += (
-            [tvf.RandomCrop((self.input_size, self.input_size))]
-            if crop_size != -1
-            else [tvf.Pad(10, 10)]
-        )
-        self.transforms += [tvf.RandomHorizontalFlip()] if augment else []
-        self.transforms += [tvf.ToTensor()]
-        self.transforms = tvf.Compose(self.transforms)
+        self.transforms = get_image_transforms(self.input_size, augment)
 
     def __getitem__(self, index):
-        if self.unpaired:
-            clean_path = self.data_list.clean[index]
-            hazy_path = self.data_list.hazy.sample(n=1).iloc[0]
-        else:
-            clean_path, hazy_path = self.data_list.iloc[index]
+        img_path = os.path.join(self.data_dir, self.paths[index])
+        image = Image.open(img_path)
+        if self.transforms != None:
+            image = self.transforms(image)
 
-        clean = self.transforms(Image.open(self.data_dir / clean_path))
-        hazy = self.transforms(Image.open(self.data_dir / hazy_path))
-
-        return clean, hazy
+        label = self.labels[index]
+        return image, label
 
     def __len__(self):
-        return len(self.data_list)
+        return len(self.labels)
 
 
-class DehazeDatamodule(LightningDataModule):
+class LivenessDatamodule(LightningDataModule):
     def __init__(self, config) -> None:
         super().__init__()
 
         self.config = config
 
     def setup(self, stage=None) -> None:
-        self.train_dataset = DehazeDataset(
+        self.train_dataset = LivenessDataset(
             self.config.train_list,
             self.config.data_dir,
-            unpaired=True,
             augment=True,
             crop_size=self.config.crop_size,
         )
-        self.val_dataset = DehazeDataset(
+        self.val_dataset = LivenessDataset(
             self.config.val_list,
             self.config.data_dir,
-            unpaired=False,
             augment=False,
-            crop_size=-1,
+            crop_size=self.config.crop_size,
         )
 
     def train_dataloader(self):
-
         return DataLoader(
             self.train_dataset,
             batch_size=self.config.batch_size,
@@ -86,3 +73,34 @@ class DehazeDatamodule(LightningDataModule):
             pin_memory=self.config.pin_memory,
             drop_last=False,
         )
+
+def get_image_transforms(input_size, augment):
+    transforms = [
+        tvf.Resize([input_size, input_size])
+    ]
+    if augment:
+        transforms += [
+            tvf.RandomHorizontalFlip()
+        ]
+    transforms += [
+        tvf.ToTensor(),
+        tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    ]
+    transforms = tvf.Compose(transforms)
+    return transforms
+
+
+# import hydra
+# from omegaconf import DictConfig, OmegaConf
+# @hydra.main(config_path="configs", config_name="default")
+# def main(config: DictConfig) -> None:
+#     print(config.dataset)
+#     datamodule = LivenessDatamodule(config.dataset)
+#     datamodule.setup()
+#     train_loader = datamodule.train_dataloader()
+#     batch = next(iter(train_loader))
+#     print(batch[0])
+#     print(batch[1])
+
+# if __name__ == "__main__":
+#     main()

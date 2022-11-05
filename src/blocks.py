@@ -1,377 +1,185 @@
 import torch
 import torch.nn as nn
+import torchvision
+import torch.nn.functional as F
 
-
-def _make_encoder(
-    backbone, features, use_pretrained, groups=1, expand=False, exportable=True
-):
-    if backbone == "resnext101_wsl":
-        pretrained = _make_pretrained_resnext101_wsl(use_pretrained)
-        scratch = _make_scratch(
-            [256, 512, 1024, 2048], features, groups=groups, expand=expand
-        )  # efficientnet_lite3
-    elif backbone == "efficientnet_lite3":
-        pretrained = _make_pretrained_efficientnet_lite3(
-            use_pretrained, exportable=exportable
-        )
-        scratch = _make_scratch(
-            [32, 48, 136, 384], features, groups=groups, expand=expand
-        )  # efficientnet_lite3
-    else:
-        print(f"Backbone '{backbone}' not implemented")
-        assert False
-
-    return pretrained, scratch
-
-
-def _make_scratch(in_shape, out_shape, groups=1, expand=False):
-    scratch = nn.Module()
-
-    out_shape1 = out_shape
-    out_shape2 = out_shape
-    out_shape3 = out_shape
-    out_shape4 = out_shape
-
-    if expand:
-        out_shape1 = out_shape
-        out_shape2 = out_shape * 2
-        out_shape3 = out_shape * 4
-        out_shape4 = out_shape * 8
-
-    scratch.layer1_rn = nn.Sequential(
-        nn.ReflectionPad2d(1),
-        nn.Conv2d(
-            in_shape[0],
-            out_shape1,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=False,
-            groups=groups,
-        ),
-    )
-    scratch.layer2_rn = nn.Sequential(
-        nn.ReflectionPad2d(1),
-        nn.Conv2d(
-            in_shape[1],
-            out_shape2,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=False,
-            groups=groups,
-        ),
-    )
-    scratch.layer3_rn = nn.Sequential(
-        nn.ReflectionPad2d(1),
-        nn.Conv2d(
-            in_shape[2],
-            out_shape3,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=False,
-            groups=groups,
-        ),
-    )
-    scratch.layer4_rn = nn.Sequential(
-        nn.ReflectionPad2d(1),
-        nn.Conv2d(
-            in_shape[3],
-            out_shape4,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=False,
-            groups=groups,
-        ),
-    )
-
-    return scratch
-
-
-def _make_pretrained_efficientnet_lite3(use_pretrained, exportable=False):
-    efficientnet = torch.hub.load(
-        "rwightman/gen-efficientnet-pytorch",
-        "tf_efficientnet_lite3",
-        pretrained=use_pretrained,
-        exportable=exportable,
-    )
-    return _make_efficientnet_backbone(efficientnet)
-
-
-def _make_efficientnet_backbone(effnet):
-    pretrained = nn.Module()
-
-    pretrained.layer1 = nn.Sequential(
-        effnet.conv_stem, effnet.bn1, effnet.act1, *effnet.blocks[0:2]
-    )
-    pretrained.layer2 = nn.Sequential(*effnet.blocks[2:3])
-    pretrained.layer3 = nn.Sequential(*effnet.blocks[3:5])
-    pretrained.layer4 = nn.Sequential(*effnet.blocks[5:9])
-
-    return pretrained
-
-
-def _make_resnet_backbone(resnet):
-    pretrained = nn.Module()
-    pretrained.layer1 = nn.Sequential(
-        resnet.conv1, resnet.bn1, resnet.relu, resnet.maxpool, resnet.layer1
-    )
-
-    pretrained.layer2 = resnet.layer2
-    pretrained.layer3 = resnet.layer3
-    pretrained.layer4 = resnet.layer4
-
-    return pretrained
-
-
-def _make_pretrained_resnext101_wsl(use_pretrained):
-    resnet = torch.hub.load("facebookresearch/WSL-Images", "resnext101_32x8d_wsl")
-    return _make_resnet_backbone(resnet)
-
-
-class Interpolate(nn.Module):
-    """Interpolation module."""
-
-    def __init__(self, scale_factor, mode):
-        """Init.
-
-        Args:
-            scale_factor (float): scaling
-            mode (str): interpolation mode
-        """
+class CNNFE(nn.Module):
+    def __init__(self):
         super().__init__()
-
-        self.interp = nn.functional.interpolate
-        self.scale_factor = scale_factor
-        self.mode = mode
-
-    def forward(self, x):
-        """Forward pass.
-
-        Args:
-            x (tensor): input
-
-        Returns:
-            tensor: interpolated data
+    def get_backbone(self):
+        raise NotImplementedError()
+    def get_n_features(self):
+        raise NotImplementedError()
+    def forward(self, images):
         """
-
-        x = self.interp(
-            x, scale_factor=self.scale_factor, mode=self.mode, align_corners=False
-        )
-
+        Args:
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
+        """
+        x = self.get_backbone()(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
         return x
 
-
-class ResidualConvUnit(nn.Module):
-    """Residual convolution module."""
-
-    def __init__(self, features):
-        """Init.
-
+class ResnetFE(CNNFE):
+    version = {
+        'resnet18':torchvision.models.resnet18,
+        'resnet34':torchvision.models.resnet34,
+        'resnet50':torchvision.models.resnet50,
+        'resnet101':torchvision.models.resnet101,
+        'resnet152':torchvision.models.resnet152
+    }
+    def __init__(self, version, feature_extract=True, pretrained=True):
+        super(ResnetFE, self).__init__()
+        resnet = ResnetFE.version[version](pretrained = pretrained)
+        self.backbone = nn.Sequential(*list(resnet.children())[:-1])
+        if feature_extract:
+            for param in self.backbone.parameters():
+                param.requires_grad = False
+        self.n_features = resnet.fc.in_features
+    def get_backbone(self):
+        return self.backbone
+    def get_n_features(self):
+        return self.n_features
+    def forward(self, images):
+        """
         Args:
-            features (int): number of features
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
         """
-        super().__init__()
+        x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
+        return x
 
-        self.conv1 = nn.Conv2d(
-            features, features, kernel_size=3, stride=1, padding=1, bias=True
-        )
-
-        self.conv2 = nn.Conv2d(
-            features, features, kernel_size=3, stride=1, padding=1, bias=True
-        )
-
-        self.relu = nn.ReLU(inplace=True)
-
-    def forward(self, x):
-        """Forward pass.
-
+class Inception(CNNFE):
+    version = {
+        'inception_v3':torchvision.models.inception_v3,
+    }
+    def __init__(self, version, feature_extract=True, pretrained=True):
+        super(Inception, self).__init__()
+        net = Inception.version[version](pretrained = pretrained)
+        self.backbone = nn.Sequential(*list(net.children())[:-1])
+        if feature_extract:
+            for param in self.backbone.parameters():
+                param.requires_grad = False
+        self.n_features = net.fc.in_features
+    def get_backbone(self):
+        return self.backbone
+    def get_n_features(self):
+        return self.n_features
+    def forward(self, images):
+        """
         Args:
-            x (tensor): input
-
-        Returns:
-            tensor: output
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
         """
-        out = self.relu(x)
-        out = self.conv1(out)
-        out = self.relu(out)
-        out = self.conv2(out)
+        x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
+        return x
 
-        return out + x
-
-
-class FeatureFusionBlock(nn.Module):
-    """Feature fusion block."""
-
-    def __init__(self, features):
-        """Init.
-
+class Mobilenet(CNNFE):
+    version = {
+        'mobilenet_v2':torchvision.models.mobilenet_v2,
+        # 'mobilenet_v3_large': torchvision.models.mobilenet_v3_large,
+        # 'mobilenet_v3_small': torchvision.models.mobilenet_v3_small,
+    }
+    def __init__(self, version, feature_extract=True, pretrained=True):
+        super(Mobilenet, self).__init__()
+        net = Mobilenet.version[version](pretrained = pretrained)
+        self.backbone = nn.Sequential(*list(net.children())[:-1])
+        if feature_extract:
+            for param in self.backbone.parameters():
+                param.requires_grad = False
+        self.n_features = net.last_channel
+    def get_backbone(self):
+        return self.backbone
+    def get_n_features(self):
+        return self.n_features
+    def forward(self, images):
+        """
         Args:
-            features (int): number of features
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
         """
-        super().__init__()
+        x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
+        return x
 
-        self.resConfUnit1 = ResidualConvUnit(features)
-        self.resConfUnit2 = ResidualConvUnit(features)
+class EfficientNet(CNNFE):
+    version = {
+        'efficientnet_b0':torchvision.models.efficientnet_b0,
+        'efficientnet_b1': torchvision.models.efficientnet_b1,
+        'efficientnet_b2': torchvision.models.efficientnet_b2,
+        'efficientnet_b3': torchvision.models.efficientnet_b3,
+        'efficientnet_b4': torchvision.models.efficientnet_b4,
+        'efficientnet_b5': torchvision.models.efficientnet_b5,
+        'efficientnet_b6': torchvision.models.efficientnet_b6,
+        'efficientnet_b7': torchvision.models.efficientnet_b7,
 
-    def forward(self, *xs):
-        """Forward pass.
-
-        Returns:
-            tensor: output
+        # 'efficientnet_v2_s': torchvision.models.efficientnet_v2_s,
+        # 'efficientnet_v2_m': torchvision.models.efficientnet_v2_m,
+        # 'efficientnet_v2_l': torchvision.models.efficientnet_v2_l,
+    }
+    def __init__(self, version, feature_extract=True, pretrained=True):
+        super(EfficientNet, self).__init__()
+        net = EfficientNet.version[version](pretrained = pretrained)
+        self.backbone = nn.Sequential(*list(net.children())[:-1])
+        if feature_extract:
+            for param in self.backbone.parameters():
+                param.requires_grad = False
+        self.n_features = net.classifier[1].in_features
+    def get_backbone(self):
+        return self.backbone
+    def get_n_features(self):
+        return self.n_features
+    def forward(self, images):
         """
-        output = xs[0]
-
-        if len(xs) == 2:
-            output += self.resConfUnit1(xs[1])
-
-        output = self.resConfUnit2(output)
-
-        output = nn.functional.interpolate(
-            output, scale_factor=2, mode="bilinear", align_corners=True
-        )
-
-        return output
-
-
-class ResidualConvUnit_custom(nn.Module):
-    """Residual convolution module."""
-
-    def __init__(self, features, activation, bn):
-        """Init.
-
         Args:
-            features (int): number of features
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
         """
-        super().__init__()
+        x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
+        return x
 
-        self.bn = bn
+class SwinTransformer(CNNFE):
+    version = {
+        'swin_t':torchvision.models.swin_t,
+        'swin_s': torchvision.models.swin_s,
+        'swin_b': torchvision.models.swin_b,
+        # 'swin_v2_t': torchvision.models.swin_v2_t,
+        # 'swin_v2_s': torchvision.models.swin_v2_s,
+        # 'swin_v2_b': torchvision.models.swin_v2_b,
 
-        self.groups = 1
-
-        self.conv1 = nn.Conv2d(
-            features,
-            features,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=True,
-            groups=self.groups,
-        )
-
-        self.conv2 = nn.Conv2d(
-            features,
-            features,
-            kernel_size=3,
-            stride=1,
-            padding=0,
-            bias=True,
-            groups=self.groups,
-        )
-
-        self.pad1 = nn.ReflectionPad2d(1)
-
-        if self.bn:
-            self.bn1 = nn.BatchNorm2d(features)
-            self.bn2 = nn.BatchNorm2d(features)
-
-        self.activation = activation
-
-        self.skip_add = nn.quantized.FloatFunctional()
-
-    def forward(self, x):
-        """Forward pass.
-
+    }
+    def __init__(self, version, feature_extract=True, pretrained=True):
+        super(SwinTransformer, self).__init__()
+        net = SwinTransformer.version[version](weights = torchvision.models.Swin_B_Weights.IMAGENET1K_V1)
+        print(net)
+        self.backbone = nn.Sequential(*list(net.children())[:-1])
+        for i, child in enumerate(list(net.children())):
+            print('child ', i, child)
+        print(net.head.in_features)
+        # exit()
+        if feature_extract:
+            for param in self.backbone.parameters():
+                param.requires_grad = False
+        self.n_features = net.head.in_features
+    def get_backbone(self):
+        return self.backbone
+    def get_n_features(self):
+        return self.n_features
+    def forward(self, images):
+        """
         Args:
-            x (tensor): input
-
-        Returns:
-            tensor: output
+            images: a tensor of dimension [batch, 3, height, width]
+        Return:
+            outputs: a tensor of dimension [batch, num_classes]
         """
-
-        out = self.activation(x)
-        out = self.pad1(out)
-        out = self.conv1(out)
-        if self.bn:
-            out = self.bn1(out)
-
-        out = self.activation(out)
-        out = self.pad1(out)
-        out = self.conv2(out)
-        if self.bn:
-            out = self.bn2(out)
-
-        if self.groups > 1:
-            out = self.conv_merge(out)
-
-        return self.skip_add.add(out, x)
-
-
-class FeatureFusionBlock_custom(nn.Module):
-    """Feature fusion block."""
-
-    def __init__(
-        self,
-        features,
-        activation,
-        deconv=False,
-        bn=False,
-        expand=False,
-        align_corners=True,
-    ):
-        """Init.
-
-        Args:
-            features (int): number of features
-        """
-        super().__init__()
-
-        self.deconv = deconv
-        self.align_corners = align_corners
-
-        self.groups = 1
-
-        self.expand = expand
-        out_features = features
-        if self.expand:
-            out_features = features // 2
-
-        self.out_conv = nn.Conv2d(
-            features,
-            out_features,
-            kernel_size=1,
-            stride=1,
-            padding=0,
-            bias=True,
-            groups=1,
-        )
-
-        self.resConfUnit1 = ResidualConvUnit_custom(features, activation, bn)
-        self.resConfUnit2 = ResidualConvUnit_custom(features, activation, bn)
-
-        self.skip_add = nn.quantized.FloatFunctional()
-
-    def forward(self, *xs):
-        """Forward pass.
-
-        Returns:
-            tensor: output
-        """
-        output = xs[0]
-
-        if len(xs) == 2:
-            res = self.resConfUnit1(xs[1])
-            output = self.skip_add.add(output, res)
-            # output += res
-
-        output = self.resConfUnit2(output)
-
-        output = nn.functional.interpolate(
-            output, scale_factor=2, mode="bilinear", align_corners=self.align_corners
-        )
-
-        output = self.out_conv(output)
-
-        return output
+        x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
+        # x = torch.flatten(x, start_dim=1) # [batch, num_features]
+        return 

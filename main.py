@@ -11,7 +11,7 @@ from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
 
-from src.dataset import DehazeDatamodule
+from src.dataset import LivenessDatamodule
 from src.model import Model
 
 log = logging.getLogger(__name__)
@@ -116,7 +116,7 @@ def train(config):
         )
 
     model = Model(config.model)
-    datamodule = DehazeDatamodule(config.dataset)
+    datamodule = LivenessDatamodule(config.dataset)
     trainer = pl.Trainer(
         logger=wandb_logger,
         callbacks=callbacks,
@@ -130,7 +130,7 @@ def train(config):
 
 @hydra.main(config_path="configs", config_name="default")
 def main(config: DictConfig) -> None:
-    log.info("Learn to Dehaze")
+    log.info("Zalo AI Challenge - Liveness Detection")
     log.info(f"Current working directory : {Path.cwd()}")
 
     if config.state == "train":

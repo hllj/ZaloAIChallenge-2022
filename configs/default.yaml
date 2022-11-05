@@ -1,4 +1,4 @@
-name: learn-to-dehaze
+name: baseline
 state: train # train/test/debug
 seed: 42
 
@@ -12,9 +12,9 @@ logging:
   root: ./logs
 
 dataset:
-  train_list: ${work_dir}/data/its_train.csv
-  val_list: ${work_dir}/data/its_val.csv
-  data_dir: /workspace/datasets/dehaze/ITS
+  train_list: ${work_dir}/data/train/train.csv
+  val_list: ${work_dir}/data/train/val.csv
+  data_dir: ${work_dir}/data
   crop_size: 256
   batch_size: 32
   num_workers: 4
