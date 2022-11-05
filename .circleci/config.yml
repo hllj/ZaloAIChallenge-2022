@@ -16,6 +16,8 @@ commands:
       - run:
           name: "Install package"
           command: |
+            conda init bash
+            source ~/.bashrc
             conda env create -n my_env -f environment.yml
             conda activate my_env
             pre-commit install
