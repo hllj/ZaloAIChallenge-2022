@@ -6,7 +6,7 @@ version: 2.1
 executors:
   python-docker:
     docker:
-      - image: cimg/python:3.10
+      - image: continuumio/conda-ci-linux-64-python3.8
     resource_class: medium
 
 commands:
@@ -31,7 +31,7 @@ commands:
 
 jobs:
   run_pre-commit: # this can be any name you choose
-    executor: python-docker # use the default executor defined within the orb
+    executor: conda executor # use the default executor defined within the orb
     # filters:
     #   branches:
     #     only:
