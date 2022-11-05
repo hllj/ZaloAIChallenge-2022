@@ -24,7 +24,7 @@ After installing conda environment, run:
 wandb login --relogin
 ```
 
-to login using your onw account.
+to login using your own account.
 ### Define your model and training process
 One best practice is creating a subfolder inside **src** for every model you want to train.
 
