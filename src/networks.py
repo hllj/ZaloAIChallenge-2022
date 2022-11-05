@@ -15,6 +15,7 @@ from .blocks import (
     _make_scratch,
 )
 
+from utils import mit_b4
 
 def normalized_tanh(tensor: torch.Tensor) -> torch.Tensor:
     return 0.5 * tensor.tanh() + 0.5
@@ -220,151 +221,150 @@ class HazeRemovalNet(BaseNetwork):
         return ((x_0 - A) / t + A).clamp(0, 1)
 
 
-class HazeProduceNet(BaseNetwork):
-    def __init__(
-        self, base_channel_nums, in_channels=3, init_weights=True, *args, **kwargs
-    ):
-        super().__init__()
+# class HazeProduceNet(BaseNetwork):
+#     def __init__(
+#         self, base_channel_nums, in_channels=3, init_weights=True, *args, **kwargs
+#     ):
+#         super().__init__()
 
-        act_type = "leakyrelu"
-        norm_type = "batch"
-        mode = "CNA"
-        use_spectral_norm = False
+#         act_type = "leakyrelu"
+#         norm_type = "batch"
+#         mode = "CNA"
+#         use_spectral_norm = False
 
-        self.conv0 = conv_block(
-            in_nc=in_channels,
-            out_nc=base_channel_nums // 2,
-            kernel_size=3,
-            stride=1,
-            pad_type="reflect",
-            mode=mode,
-            act_type=act_type,
-            norm_type=None,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.pool0 = nn.MaxPool2d(2, 2)
+#         self.conv0 = conv_block(
+#             in_nc=in_channels,
+#             out_nc=base_channel_nums // 2,
+#             kernel_size=3,
+#             stride=1,
+#             pad_type="reflect",
+#             mode=mode,
+#             act_type=act_type,
+#             norm_type=None,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.pool0 = nn.MaxPool2d(2, 2)
 
-        self.conv1 = conv_block(
-            in_nc=base_channel_nums // 2,
-            out_nc=base_channel_nums,
-            kernel_size=3,
-            stride=1,
-            pad_type="reflect",
-            mode=mode,
-            act_type=act_type,
-            norm_type=norm_type,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.pool1 = nn.MaxPool2d(2, 2)
+#         self.conv1 = conv_block(
+#             in_nc=base_channel_nums // 2,
+#             out_nc=base_channel_nums,
+#             kernel_size=3,
+#             stride=1,
+#             pad_type="reflect",
+#             mode=mode,
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.pool1 = nn.MaxPool2d(2, 2)
 
-        self.conv2 = conv_block(
-            in_nc=base_channel_nums,
-            out_nc=2 * base_channel_nums,
-            kernel_size=3,
-            stride=2,
-            pad_type="reflect",
-            mode=mode,
-            act_type=act_type,
-            norm_type=norm_type,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.pool2 = nn.MaxPool2d(2, 2)
+#         self.conv2 = conv_block(
+#             in_nc=base_channel_nums,
+#             out_nc=2 * base_channel_nums,
+#             kernel_size=3,
+#             stride=2,
+#             pad_type="reflect",
+#             mode=mode,
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.pool2 = nn.MaxPool2d(2, 2)
 
-        self.conv3 = conv_block(
-            in_nc=2 * base_channel_nums,
-            out_nc=4 * base_channel_nums,
-            kernel_size=3,
-            stride=2,
-            pad_type="reflect",
-            mode=mode,
-            act_type=act_type,
-            norm_type=norm_type,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.pool3 = nn.MaxPool2d(2, 2)
-        #
-        self.bottleneck1 = ResNetBlock(
-            in_nc=4 * base_channel_nums,
-            mid_nc=4 * base_channel_nums,
-            out_nc=4 * base_channel_nums,
-            kernel_size=3,
-            pad_type="reflect",
-            act_type=act_type,
-            norm_type=norm_type,
-            mode=mode,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.bottleneck2 = ResNetBlock(
-            in_nc=4 * base_channel_nums,
-            mid_nc=4 * base_channel_nums,
-            out_nc=4 * base_channel_nums,
-            kernel_size=3,
-            pad_type="reflect",
-            act_type=act_type,
-            norm_type=norm_type,
-            mode=mode,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.bottleneck3 = ResNetBlock(
-            in_nc=4 * base_channel_nums,
-            mid_nc=4 * base_channel_nums,
-            out_nc=4 * base_channel_nums,
-            kernel_size=3,
-            pad_type="reflect",
-            act_type=act_type,
-            norm_type=norm_type,
-            mode=mode,
-            use_spectral_norm=use_spectral_norm,
-        )
-        self.bottleneck4 = ResNetBlock(
-            in_nc=4 * base_channel_nums,
-            mid_nc=4 * base_channel_nums,
-            out_nc=4 * base_channel_nums,
-            kernel_size=3,
-            pad_type="reflect",
-            act_type=act_type,
-            norm_type=norm_type,
-            mode=mode,
-            use_spectral_norm=use_spectral_norm,
-        )
+#         self.conv3 = conv_block(
+#             in_nc=2 * base_channel_nums,
+#             out_nc=4 * base_channel_nums,
+#             kernel_size=3,
+#             stride=2,
+#             pad_type="reflect",
+#             mode=mode,
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.pool3 = nn.MaxPool2d(2, 2)
+#         #
+#         self.bottleneck1 = ResNetBlock(
+#             in_nc=4 * base_channel_nums,
+#             mid_nc=4 * base_channel_nums,
+#             out_nc=4 * base_channel_nums,
+#             kernel_size=3,
+#             pad_type="reflect",
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             mode=mode,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.bottleneck2 = ResNetBlock(
+#             in_nc=4 * base_channel_nums,
+#             mid_nc=4 * base_channel_nums,
+#             out_nc=4 * base_channel_nums,
+#             kernel_size=3,
+#             pad_type="reflect",
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             mode=mode,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.bottleneck3 = ResNetBlock(
+#             in_nc=4 * base_channel_nums,
+#             mid_nc=4 * base_channel_nums,
+#             out_nc=4 * base_channel_nums,
+#             kernel_size=3,
+#             pad_type="reflect",
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             mode=mode,
+#             use_spectral_norm=use_spectral_norm,
+#         )
+#         self.bottleneck4 = ResNetBlock(
+#             in_nc=4 * base_channel_nums,
+#             mid_nc=4 * base_channel_nums,
+#             out_nc=4 * base_channel_nums,
+#             kernel_size=3,
+#             pad_type="reflect",
+#             act_type=act_type,
+#             norm_type=norm_type,
+#             mode=mode,
+#             use_spectral_norm=use_spectral_norm,
+#         )
 
-        self.fc = nn.Sequential(
-            nn.AdaptiveMaxPool2d(output_size=7),
-            nn.Flatten(),
-            nn.Linear(4 * base_channel_nums * 7 * 7, 4),
-        )
+#         self.fc = nn.Sequential(
+#             nn.AdaptiveMaxPool2d(output_size=7),
+#             nn.Flatten(),
+#             nn.Linear(4 * base_channel_nums * 7 * 7, 4),
+#         )
 
-        if init_weights:
-            self.init_weights("xaiver")
+#         if init_weights:
+#             self.init_weights("xaiver")
 
-    def forward(self, x, d):
-        B = x.size(0)
-        x0 = x
+#     def forward(self, x, d):
+#         B = x.size(0)
+#         x0 = x
 
-        x = self.conv0(x)
-        x = self.pool0(x)
-        x = self.conv1(x)
-        x = self.pool1(x)
-        x = self.conv2(x)
-        x = self.pool2(x)
-        x = self.conv3(x)
-        x = self.pool3(x)
+#         x = self.conv0(x)
+#         x = self.pool0(x)
+#         x = self.conv1(x)
+#         x = self.pool1(x)
+#         x = self.conv2(x)
+#         x = self.pool2(x)
+#         x = self.conv3(x)
+#         x = self.pool3(x)
 
-        x = self.bottleneck1(x)
-        x = self.bottleneck2(x)
-        x = self.bottleneck3(x)
-        x = self.bottleneck4(x)
-        x = self.fc(x)  # [B, 4]
-        x = x.view(B, -1, 1, 1)
+#         x = self.bottleneck1(x)
+#         x = self.bottleneck2(x)
+#         x = self.bottleneck3(x)
+#         x = self.bottleneck4(x)
+#         x = self.fc(x)  # [B, 4]
+#         x = x.view(B, -1, 1, 1)
 
-        A, beta = torch.split(x, [3, 1], dim=1)
-        A = normalized_tanh(A)
-        beta = F.relu6(beta)
+#         A, beta = torch.split(x, [3, 1], dim=1)
+#         A = normalized_tanh(A)
+#         beta = F.relu6(beta)
 
-        t = torch.exp(-d * beta).clamp(0.05, 1.0)
-        x = t * x0 + A * (1 - t)
-        return x.clamp(0, 1)
-
+#         t = torch.exp(-d * beta).clamp(0.05, 1.0)
+#         x = t * x0 + A * (1 - t)
+#         return x.clamp(0, 1)
 
 class DepthEstimationNet(BaseNetwork):
     def __init__(
@@ -491,7 +491,6 @@ class DepthEstimationNet(BaseNetwork):
         out = self.MIN_D + out * (self.MAX_D - self.MIN_D)
 
         return out
-
 
 class MidasNet_small(BaseNetwork):
     """Network for monocular depth estimation."""
@@ -642,6 +641,84 @@ class MidasNet_small(BaseNetwork):
 
         return torch.squeeze(out, dim=1)
 
+def double_conv(in_channels, out_channels):
+    return nn.Sequential(
+        nn.Conv2d(in_channels, out_channels, 3, padding=1),
+        nn.ReLU(inplace=True),
+        nn.Conv2d(out_channels, out_channels, 3, padding=1),
+        nn.ReLU(inplace=True)
+    )   
+
+
+class HazeProduceNet(BaseNetwork):
+
+    def __init__(self, base_channel_nums, in_channels=3, init_weights=True, *args, **kwargs):
+        super().__init__()
+                
+        self.dconv_down1 = double_conv(in_channels, 64)
+        self.dconv_down2 = double_conv(64, 128)
+        self.dconv_down3 = double_conv(128, 256)
+        self.dconv_down4 = double_conv(256, 512)        
+
+        self.maxpool = nn.MaxPool2d(2)
+        self.upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)        
+        
+        self.dconv_up3 = double_conv(256 + 512, 256)
+        self.dconv_up2 = double_conv(128 + 256, 128)
+        self.dconv_up1 = double_conv(128 + 64, 64)
+
+        self.conv_last = nn.Conv2d(64, in_channels, 1)
+        
+        if init_weights:
+            self.init_weights("xaiver")
+        
+    def forward(self, x, d=None):
+        conv1 = self.dconv_down1(x)
+        x = self.maxpool(conv1)
+
+        conv2 = self.dconv_down2(x)
+        x = self.maxpool(conv2)
+        
+        conv3 = self.dconv_down3(x)
+        x = self.maxpool(conv3)   
+        
+        x = self.dconv_down4(x)
+        
+        x = self.upsample(x)        
+        x = torch.cat([x, conv3], dim=1)
+        
+        x = self.dconv_up3(x)
+        x = self.upsample(x)        
+        x = torch.cat([x, conv2], dim=1)       
+
+        x = self.dconv_up2(x)
+        x = self.upsample(x)        
+        x = torch.cat([x, conv1], dim=1)   
+        
+        x = self.dconv_up1(x)
+        
+        out = normalized_tanh(self.conv_last(x))
+        return out
+
+def up_block(
+    in_nc,
+    out_nc,
+    act_type="relu",
+    mode="CNA",
+    use_spectral_norm=False,
+):
+    up = nn.ConvTranspose2d(in_nc, in_nc // 2, kernel_size=2, stride=2)
+    norm = nn.BatchNorm2d(out_nc*2)
+    act = act(act_type)
+    
+    if use_spectral_norm:
+        conv = spectral_norm(
+            nn.Conv(in_nc, out_nc*2),
+            mode=use_spectral_norm,
+        )
+    else:
+        conv = nn.Conv(in_nc, out_nc*2)
+    return sequential(up, conv, norm, act)
 
 def conv_block(
     in_nc,
@@ -1181,3 +1258,98 @@ class GaussianFilter(nn.Module):
 
         kernel = kernel / torch.sum(kernel)
         return kernel
+    
+
+class GLPDepth(nn.Module):
+    def __init__(self, max_depth=10.0, is_train=False):
+        super().__init__()
+        self.max_depth = max_depth
+
+        self.encoder = mit_b4()
+        channels_in = [512, 320, 128]
+        channels_out = 64
+            
+        self.decoder = Decoder(channels_in, channels_out)
+    
+        self.last_layer_depth = nn.Sequential(
+            nn.Conv2d(channels_out, channels_out, kernel_size=3, stride=1, padding=1),
+            nn.ReLU(inplace=False),
+            nn.Conv2d(channels_out, 1, kernel_size=3, stride=1, padding=1))
+
+    def forward(self, x):                
+        conv1, conv2, conv3, conv4 = self.encoder(x)
+        out = self.decoder(conv1, conv2, conv3, conv4)
+        out_depth = self.last_layer_depth(out)
+        out_depth = torch.sigmoid(out_depth) * self.max_depth
+
+        return out_depth
+
+
+class Decoder(nn.Module):
+    def __init__(self, in_channels, out_channels):
+        super().__init__()
+
+        self.bot_conv = nn.Conv2d(
+            in_channels=in_channels[0], out_channels=out_channels, kernel_size=1)
+        self.skip_conv1 = nn.Conv2d(
+            in_channels=in_channels[1], out_channels=out_channels, kernel_size=1)
+        self.skip_conv2 = nn.Conv2d(
+            in_channels=in_channels[2], out_channels=out_channels, kernel_size=1)
+
+        self.up = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=False)
+        
+        self.fusion1 = SelectiveFeatureFusion(out_channels)
+        self.fusion2 = SelectiveFeatureFusion(out_channels)
+        self.fusion3 = SelectiveFeatureFusion(out_channels)
+
+    def forward(self, x_1, x_2, x_3, x_4):
+        x_4_ = self.bot_conv(x_4)
+        out = self.up(x_4_)
+
+        x_3_ = self.skip_conv1(x_3)
+        out = self.fusion1(x_3_, out)
+        out = self.up(out)
+
+        x_2_ = self.skip_conv2(x_2)
+        out = self.fusion2(x_2_, out)
+        out = self.up(out)
+
+        out = self.fusion3(x_1, out)
+        out = self.up(out)
+        out = self.up(out)
+
+        return out
+
+
+class SelectiveFeatureFusion(nn.Module):
+    def __init__(self, in_channel=64):
+        super().__init__()
+
+        self.conv1 = nn.Sequential(
+            nn.Conv2d(in_channels=int(in_channel*2),
+                      out_channels=in_channel, kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(in_channel),
+            nn.ReLU())
+
+        self.conv2 = nn.Sequential(
+            nn.Conv2d(in_channels=in_channel, 
+                      out_channels=int(in_channel / 2), kernel_size=3, stride=1, padding=1),
+            nn.BatchNorm2d(int(in_channel / 2)),
+            nn.ReLU())
+
+        self.conv3 = nn.Conv2d(in_channels=int(in_channel / 2), 
+                               out_channels=2, kernel_size=3, stride=1, padding=1)
+
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x_local, x_global):
+        x = torch.cat((x_local, x_global), dim=1)
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = self.conv3(x)
+        attn = self.sigmoid(x)
+
+        out = x_local * attn[:, 0, :, :].unsqueeze(1) + \
+              x_global * attn[:, 1, :, :].unsqueeze(1)
+
+        return out

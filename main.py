@@ -74,17 +74,6 @@ class LogPredictionSamplesCallback(Callback):
                 key="val/visualization", images=images, caption=captions
             )
 
-            # Option 2: log images and predictions as a W&B Table
-            # columns = ["image", "ground truth", "prediction"]
-            # data = [
-            #     [wandb.Image(x_i), y_i, y_pred]
-            #     for x_i, y_i, y_pred in list(zip(x[:n], y[:n], outputs[:n]))
-            # ]
-            # self.wandb_logger.log_table(
-            #     key="sample_table", columns=columns, data=data
-            # )
-
-
 def train(config):
     config.seed = pl.seed_everything(seed=config.seed, workers=True)
 
