@@ -19,9 +19,7 @@ commands:
             conda init bash
             source ~/.bashrc
             conda env create -n my_env -f environment.yml
-            conda init bash
-            . ~/.bashrc
-            conda activate my_env
+            source activate my_env
             pre-commit install
       - run:
           name: "Run pre-commit sentiment analysis"
