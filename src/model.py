@@ -1,59 +1,71 @@
+import timm
 import torch
 import torch.nn as nn
+import pytorch_lightning as pl
+import torchmetrics
 from pytorch_lightning import LightningModule
 from torch.optim.optimizer import Optimizer
 from torchmetrics import MetricCollection, PeakSignalNoiseRatio
 
-from .loss import AdversarialLoss
-from .networks import DepthEstimationNet, Discriminator, HazeProduceNet, HazeRemovalNet
-
-# from torchvision.models import VGG11_Weights, vgg11
+from .loss import LabelSmoothingLoss
+from .networks import EfficientNetB3DSPlus
 
 
-class Model(LightningModule):
-    def __init__(self, config) -> None:
+class TIMMModel(LightningModule):
+    def __init__(self, config):
         super().__init__()
-
-        self.save_hyperparameters(config)
-
-        self.l1_loss = nn.L1Loss()
-        self.l2_loss = nn.MSELoss()
-        self.adversarial_loss = AdversarialLoss(loss_type="wgan-gp")
-
-        self.depth_estimator = DepthEstimationNet(**self.hparams.depth_estimator)
-        self.haze_producer = HazeProduceNet(**self.hparams.haze_producer)
-        # self.loss_estimator = vgg11(weights=VGG11_Weights.DEFAULT)
-        # self.loss_estimator.classifier[-1] = nn.Linear(4096, 1)
-        # self.loss_estimator.classifier.append(nn.ReLU(True))
-        self.haze_remover = HazeRemovalNet(**self.hparams.haze_remover)
-        self.discriminator = Discriminator(
-            in_channels=3, use_spectral_norm=True, use_sigmoid=False
+        self.config = config
+        self.save_hyperparameters()
+        self.criterion = nn.CrossEntropyLoss()
+        self.train_acc = torchmetrics.Accuracy()
+        self.val_acc = torchmetrics.Accuracy()
+        self.model = EfficientNetB3DSPlus(model_name=config.model_name, n_class=config.n_class)
+    
+    def configure_optimizers(self):
+        optimizer = torch.optim.Adam(
+            self.model.parameters(),
+            lr=self.config.optimizer.lr,
+            weight_decay=self.config.optimizer.weight_decay
         )
-
-        metric_collection = MetricCollection(
-            [
-                PeakSignalNoiseRatio(data_range=1.0),
-                # Using SSIM will cause OOM
-            ],
+        scheduler = torch.optim.lr_scheduler.StepLR(
+            optimizer,
+            step_size=self.config.lr_scheduler.step_size,
+            gamma=self.config.lr_scheduler.gamma
         )
-        self.train_metrics = metric_collection.clone("train/")
-        self.val_metrics = metric_collection.clone("val/")
-
-        self.automatic_optimization = False
-
+        return [optimizer], [scheduler]
+    
+    def forward(self, x):
+        x = self.model(x)
+        return x
+    
+    def step(self, batch):
+        x, y = batch
+        logits = self.forward(x)
+        loss = self.criterion(logits, y)
+        preds = torch.argmax(logits, dim=1)
+        return loss, preds, y
+    
     def training_step(self, batch, batch_idx) -> None:
-        pass
+        loss, preds, targets = self.step(batch)
+        acc = self.train_acc(preds, targets)
+        
+        self.log('train/loss', loss, on_step=False, on_epoch=True, prog_bar=True)
+        self.log('train/acc', acc, on_step=False, on_epoch=True, prog_bar=True)
+        return {'loss': loss}
+        
 
     def validation_step(self, batch, batch_idx) -> None:
-        pass
+        val_loss, val_preds, val_targets = self.step(batch)
+        val_acc = self.val_acc(val_preds, val_targets)
+        
+        self.log('val/loss', val_loss, on_step=False, on_epoch=True, prog_bar=True)
+        self.log('val/acc', val_acc, on_step=False, on_epoch=True, prog_bar=True)
+        return {'val_loss': val_loss}
 
     def test_step(self, batch, batch_idx) -> None:
         raise NotImplementedError
-
-    def configure_optimizers(self):
-        pass
-
-    def optimizer_zero_grad(
-        self, epoch: int, batch_idx: int, optimizer: Optimizer, optimizer_idx: int
-    ):
-        optimizer.zero_grad(set_to_none=True)
+    
+    def on_epoch_end(self):
+        self.train_acc.reset()
+        self.val_acc.reset()
+        

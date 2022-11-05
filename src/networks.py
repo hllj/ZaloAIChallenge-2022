@@ -1,33 +1,27 @@
+import timm
 import torch
 import torch.nn as nn
 import torchvision
 import torch.nn.functional as F
-from .blocks import fe
-class CNNModel(nn.Module):
-    def __init__(self, fe_name, version, feature_extract=True, pretrained=True, number_class=2, drop_p=0.3):
-        super(CNNModel, self).__init__()
-        fe_module = getattr(fe, fe_name)
-        self.backbone = fe_module(version, feature_extract=True, pretrained=True)
-        self.n_features = self.backbone.get_n_features()
-        self.fc_cnn = nn.Sequential(
-            nn.Linear(self.n_features, 512),
-            nn.BatchNorm1d(512, momentum=0.01),
-            nn.ReLU(),
-            nn.Dropout(p=drop_p),
-            nn.Linear(512, number_class)
-        )
+    
+class EfficientNetB3DSPlus(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=True):
+        super().__init__()
+        backbone = timm.create_model(model_name, pretrained=pretrained)
+        try:
+            n_features = backbone.classifier.in_features
+        except:
+            n_features = backbone.fc.in_features
+        self.backbone = nn.Sequential(*backbone.children())[:-2]
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.classifier = nn.Linear(n_features, n_class)
+        
+    def forward_features(self, x):
+        x = self.backbone(x)
+        return x
 
-    def forward(self, images):
-        """
-        Args:
-            images: a tensor of dimension [batch, 3, height, width]
-        Return:
-            outputs: a tensor of dimension [batch, num_classes]
-        """
-        self.backbone.eval()
-        with torch.no_grad():
-            print(images.shape)
-            x = self.backbone(images) # [batch, num_features, H', W'] = [batch, 2048, 1, 1]
-            x = torch.flatten(x, start_dim=1) # [batch, num_features]
-        x = self.fc_cnn(x)
-        return 
+    def forward(self, x):
+        feats = self.forward_features(x)
+        x = self.pool(feats).view(x.size(0), -1)
+        x = self.classifier(x)
+        return x

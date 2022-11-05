@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 
+import torch
 import pandas as pd
 import torchvision.transforms as tvf
 from PIL import Image
@@ -27,7 +28,7 @@ class LivenessDataset(Dataset):
         if self.transforms != None:
             image = self.transforms(image)
 
-        label = self.labels[index]
+        label = torch.tensor(int(self.labels[index]))
         return image, label
 
     def __len__(self):
@@ -37,7 +38,7 @@ class LivenessDataset(Dataset):
 class LivenessDatamodule(LightningDataModule):
     def __init__(self, config) -> None:
         super().__init__()
-
+        print('check', config['train_list'])
         self.config = config
 
     def setup(self, stage=None) -> None:

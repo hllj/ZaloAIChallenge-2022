@@ -12,7 +12,7 @@ from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
 
 from src.dataset import LivenessDatamodule
-from src.model import Model
+from src.model import TIMMModel
 
 log = logging.getLogger(__name__)
 
@@ -78,7 +78,7 @@ def train(config):
     config.seed = pl.seed_everything(seed=config.seed, workers=True)
 
     wandb_logger = WandbLogger(
-        project="learn-to-dehaze",
+        project="zalo_2022",
         log_model=False,
         settings=wandb.Settings(start_method="fork"),
         name=Path.cwd().stem,
@@ -88,7 +88,7 @@ def train(config):
     callbacks = []
     callbacks.append(ModelCheckpoint(**config.model_ckpt))
     callbacks.append(RichProgressBar(config.refresh_rate))
-    callbacks.append(LogPredictionSamplesCallback(wandb_logger))
+    # callbacks.append(LogPredictionSamplesCallback(wandb_logger))
 
     OmegaConf.set_struct(config, False)
     strategy = config.trainer.pop("strategy", None)
@@ -115,7 +115,7 @@ def train(config):
             static_graph=config.ddp_plugin.static_graph,
         )
 
-    model = Model(config.model)
+    model = TIMMModel(config.model)
     datamodule = LivenessDatamodule(config.dataset)
     trainer = pl.Trainer(
         logger=wandb_logger,
@@ -126,21 +126,22 @@ def train(config):
 
     wandb_logger.watch(model, log_graph=False)
     trainer.fit(model, datamodule=datamodule)
+    wandb_logger.finish()
 
 
-@hydra.main(config_path="configs", config_name="default")
+@hydra.main(config_path="configs", config_name="baseline-efficientnet-b4")
 def main(config: DictConfig) -> None:
     log.info("Zalo AI Challenge - Liveness Detection")
     log.info(f"Current working directory : {Path.cwd()}")
-
-    if config.state == "train":
-        set_debug_apis(state=False)
-        train(config)
-    elif config.state == "debug":
-        pass
-    elif config.state == "test":
-        set_debug_apis(state=False)
-        pass
+    train(config)
+    # if config.state == "train":
+    #     set_debug_apis(state=False)
+    #     train(config)
+    # elif config.state == "debug":
+    #     pass
+    # elif config.state == "test":
+    #     set_debug_apis(state=False)
+    #     pass
 
 
 if __name__ == "__main__":
