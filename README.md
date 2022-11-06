@@ -64,8 +64,8 @@ cd data/
 unzip train.zip
 unzip public.zip
 python get_frame.py -i train/videos/ -o train/images/
-python get_frame.py -i public/videos/ -o public/videos/
-python create_data -dir train/ -l label.csv
+python get_frame.py -i public/videos/ -o public/images/
+python create_data.py -dir train/ -l label.csv
 ```
 
 train_list: data/train/train.csv
