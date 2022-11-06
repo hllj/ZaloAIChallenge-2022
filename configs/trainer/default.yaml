@@ -1,0 +1,14 @@
+# GPU related
+precision: 16
+accelerator: gpu
+devices: -1
+num_nodes: 1
+strategy: null
+benchmark: True
+sync_batchnorm: False
+# Training related
+# max_steps: 100000
+max_epochs: 30
+# limit_train_batches: 1.0
+# gradient_clip_val: 0.1 # gradient clipping max norm
+# gradient_clip_algorithm: "norm"

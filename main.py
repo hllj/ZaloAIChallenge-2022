@@ -115,7 +115,6 @@ def train(config):
             else None,
             static_graph=config.ddp_plugin.static_graph,
         )
-
     model = TIMMModel(config.model)
     datamodule = LivenessDatamodule(config.dataset)
     trainer = pl.Trainer(
@@ -127,22 +126,20 @@ def train(config):
 
     wandb_logger.watch(model, log_graph=False)
     trainer.fit(model, datamodule=datamodule)
-    wandb_logger.finish()
 
 
-@hydra.main(config_path="configs", config_name="baseline-efficientnet-b4")
+@hydra.main(config_path="configs", config_name="baseline")
 def main(config: DictConfig) -> None:
     log.info("Zalo AI Challenge - Liveness Detection")
     log.info(f"Current working directory : {Path.cwd()}")
-    train(config)
-    # if config.state == "train":
-    #     set_debug_apis(state=False)
-    #     train(config)
-    # elif config.state == "debug":
-    #     pass
-    # elif config.state == "test":
-    #     set_debug_apis(state=False)
-    #     pass
+    if config.state == "train":
+        set_debug_apis(state=False)
+        train(config)
+    elif config.state == "debug":
+        pass
+    elif config.state == "test":
+        set_debug_apis(state=False)
+        pass
 
 
 if __name__ == "__main__":

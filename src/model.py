@@ -3,6 +3,7 @@ import timm
 import torch
 import torch.nn as nn
 import torchmetrics
+from hydra.utils import instantiate
 from pytorch_lightning import LightningModule
 from torch.optim.optimizer import Optimizer
 from torchmetrics import MetricCollection, PeakSignalNoiseRatio
@@ -19,21 +20,11 @@ class TIMMModel(LightningModule):
         self.criterion = nn.CrossEntropyLoss()
         self.train_acc = torchmetrics.Accuracy()
         self.val_acc = torchmetrics.Accuracy()
-        self.model = EfficientNetB3DSPlus(
-            model_name=config.model_name, n_class=config.n_class
-        )
+        self.model = instantiate(self.config.arch)
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(
-            self.model.parameters(),
-            lr=self.config.optimizer.lr,
-            weight_decay=self.config.optimizer.weight_decay,
-        )
-        scheduler = torch.optim.lr_scheduler.StepLR(
-            optimizer,
-            step_size=self.config.lr_scheduler.step_size,
-            gamma=self.config.lr_scheduler.gamma,
-        )
+        optimizer = instantiate(self.config.optimizer, params=self.model.parameters())
+        scheduler = instantiate(self.config.lr_scheduler, optimizer=optimizer)
         return [optimizer], [scheduler]
 
     def forward(self, x):
