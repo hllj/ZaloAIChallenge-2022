@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 import cv2
+import hydra
 import pandas as pd
 import torch
 import torchvision.transforms as tvf
@@ -22,7 +23,9 @@ from torch.utils.data import DataLoader, Dataset
 
 
 class LivenessDataset(Dataset):
-    def __init__(self, data_list, data_dir, augment=True, crop_size=256) -> None:
+    def __init__(
+        self, data_list, data_dir, augment=True, augment_config=False, crop_size=256
+    ) -> None:
         super().__init__()
         self.data_dir = Path(data_dir)
         df = pd.read_csv(data_list)
@@ -30,7 +33,7 @@ class LivenessDataset(Dataset):
         self.labels = list(map(str, df.iloc[:, 1]))
 
         self.input_size = crop_size
-        self.transforms = get_image_transforms(self.input_size, augment)
+        self.transforms = get_image_transforms(self.input_size, augment, augment_config)
 
     def __getitem__(self, index):
         img_path = os.path.join(self.data_dir, self.paths[index])
@@ -56,6 +59,7 @@ class LivenessDatamodule(LightningDataModule):
             self.config.data_dir,
             augment=True,
             crop_size=self.config.crop_size,
+            augment_config=self.config.augmentation,
         )
         self.val_dataset = LivenessDataset(
             self.config.val_list,
@@ -110,16 +114,22 @@ class LivenessDatamodule(LightningDataModule):
 #         ])
 
 
-def get_image_transforms(input_size, augment):
+def get_image_transforms(input_size, augment, augment_config):
     transforms = []
     if augment:
-        transforms += [tvf.Resize([input_size, input_size]), tvf.RandomHorizontalFlip()]
-    else:
         transforms += [tvf.Resize([input_size, input_size])]
-    transforms += [
-        tvf.ToTensor(),
-        tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ]
+        for aug in augment_config:
+            transforms += [hydra.utils.instantiate(augment_config[aug])]
+        transforms += [
+            tvf.ToTensor(),
+            tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    else:
+        transforms += [
+            tvf.Resize([input_size, input_size]),
+            tvf.ToTensor(),
+            tvf.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
     transforms = tvf.Compose(transforms)
     return transforms
 
