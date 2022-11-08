@@ -5,12 +5,12 @@ arch:
   n_class: 2
   model_name: swin_base_patch4_window12_384
   pretrained: True
-
+monitor: "val/loss"
 optimizer:
   _target_: torch.optim.AdamW
   lr: 3e-5
   weight_decay: 1e-6
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.CosineAnnealingLR
-  min_lr : 1e-6
+  eta_min : 1e-6
   T_max : 100

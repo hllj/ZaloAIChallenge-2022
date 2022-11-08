@@ -3,9 +3,9 @@ work_dir: ${hydra:runtime.cwd}
 # checkpoint: outputs/baseline-tf_efficientnet_b4_ns/2022-11-06-13-06-47/ckpts/checkpoint-epoch4-step1310-val_acc0.992-val_loss0.017.ckpt
 # crop_size: 512
 
-name: hvflip
-checkpoint: outputs/baseline_hvflip-tf_efficientnet_b4_ns/2022-11-07-09-32-01/ckpts/checkpoint-epoch13-step3668-val_acc0.992-val_loss0.019.ckpt
-crop_size: 512
+name: swin-2022-11-07-18-05-26
+checkpoint: outputs/baseline-swin_base_patch4_window12_384/2022-11-07-18-05-26/ckpts/checkpoint-epoch13-step7336-val_acc0.984-val_loss0.044.ckpt
+crop_size: 384
 
 hydra:
   run:

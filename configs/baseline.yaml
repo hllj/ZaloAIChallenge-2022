@@ -12,9 +12,46 @@ logging:
   root: ./logs
 
 defaults:
-  - dataset: basedataset
-  - model: swin_base_patch4_window12_384
-  - trainer: default
+  - model: tf_efficientnet_b0_ns
+
+dataset:
+  train_list: ${work_dir}/data/train/train.csv
+  val_list: ${work_dir}/data/train/val.csv
+  data_dir: ${work_dir}/data
+  crop_size: 512
+  batch_size: 32
+  num_workers: 4
+  pin_memory: True
+  augmentation:
+    aug1:
+      _target_: torchvision.transforms.RandomHorizontalFlip
+      p: 0.5
+    aug2:
+      _target_: torchvision.transforms.RandomVerticalFlip
+      p: 0.2
+    aug3:
+      _target_: torchvision.transforms.ColorJitter
+      brightness: 0.5
+      contrast: 0.5
+      saturation: 0.5
+      hue: 0.5
+
+
+trainer:
+  # GPU related
+  precision: 16
+  accelerator: gpu
+  devices: -1
+  num_nodes: 1
+  strategy: null #ddp if we want to use Multi-GPUs
+  benchmark: True
+  sync_batchnorm: False
+  # Training related
+  # max_steps: 100000
+  max_epochs: 30
+  # limit_train_batches: 1.0
+  # gradient_clip_val: 0.1 # gradient clipping max norm
+  # gradient_clip_algorithm: "norm"
 
 # Logging, progress bar
 refresh_rate: 10
@@ -22,7 +59,7 @@ refresh_rate: 10
 model_ckpt:
   dirpath: ckpts/
   filename: "checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}"
-  monitor: val/loss
+  monitor: ${model.monitor}
   save_last: True
   save_top_k: 5
   mode: min

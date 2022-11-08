@@ -1,16 +1,18 @@
-name: tf_efficientnet_b5_ns
+name: tf_efficientnet_b0_ns
 sync_dist: True # Use when training with multiple gpu
 arch:
   _target_: src.networks.EfficientNetB3DSPlus
   n_class: 2
-  model_name: tf_efficientnet_b5_ns
+  model_name: tf_efficientnet_b0_ns
 monitor: "val/loss"
 optimizer:
   _target_: torch.optim.AdamW
   lr: 1e-4
   weight_decay: 1e-6
 lr_scheduler:
-  _target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
-  T_0: 10
-  T_mult: 1
-  eta_min: 1e-6
+  _target_: torch.optim.lr_scheduler.CyclicLR
+  base_lr: 0.001
+  max_lr: 0.1
+  step_size_up: 5
+  mode: "exp_range"
+  gamma: 0.85

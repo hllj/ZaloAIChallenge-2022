@@ -114,7 +114,7 @@ class LivenessDatamodule(LightningDataModule):
 #         ])
 
 
-def get_image_transforms(input_size, augment, augment_config):
+def get_image_transforms(input_size, augment, augment_config=None):
     transforms = []
     if augment:
         transforms += [tvf.Resize([input_size, input_size])]
