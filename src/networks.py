@@ -29,78 +29,37 @@ class EfficientNetB3DSPlus(nn.Module):
         return x
 
 
-class VITBasePatch16Res384(nn.Module):
-    def __init__(
-        self,
-        model_name,
-        n_class=2,
-        pretrained=False,
-        multi_drop=False,
-        multi_drop_rate=0.5,
-        att_layer=False,
-        att_pattern="A",
-    ):
+class ResNext(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=True):
         super().__init__()
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.att_layer = att_layer
-        self.multi_drop = multi_drop
-
         self.model = timm.create_model(model_name, pretrained=pretrained)
-        n_features = self.model.head.in_features
-        self.model.head = nn.Identity()
-
-        self.head = nn.Linear(n_features, 5)
-        self.head_drops = nn.ModuleList()
-        for i in range(5):
-            self.head_drops.append(nn.Dropout(multi_drop_rate))
-
-        if att_layer:
-            if att_pattern == "A":
-                self.att_layer = nn.Sequential(
-                    nn.Linear(n_features, 256),
-                    nn.Tanh(),
-                    nn.Linear(256, 1),
-                )
-            elif att_pattern == "B":
-                self.att_layer = nn.Linear(n_features, 1)
-            else:
-                raise ValueError("invalid att pattern")
+        n_features = self.model.fc.in_features
+        self.model.fc = nn.Linear(n_features, n_class)
 
     def forward(self, x):
-        if self.att_layer:
-            l = x.shape[2] // 2
-            h1 = self.model(x[:, :, :l, :l])
-            h2 = self.model(x[:, :, :l, l:])
-            h3 = self.model(x[:, :, l:, :l])
-            h4 = self.model(x[:, :, l:, l:])
-            w = F.softmax(
-                torch.cat(
-                    [
-                        self.att_layer(h1),
-                        self.att_layer(h2),
-                        self.att_layer(h3),
-                        self.att_layer(h4),
-                    ],
-                    dim=1,
-                ),
-                dim=1,
-            )
-            h = (
-                h1 * w[:, 0].unsqueeze(-1)
-                + h2 * w[:, 1].unsqueeze(-1)
-                + h3 * w[:, 2].unsqueeze(-1)
-                + h4 * w[:, 3].unsqueeze(-1)
-            )
-        else:
-            h = self.model(x)
+        x = self.model(x)
+        return x
 
-        if self.multi_drop:
-            for i, dropout in enumerate(self.head_drops):
-                if i == 0:
-                    output = self.head(dropout(h))
-                else:
-                    output += self.head(dropout(h))
-            output /= len(self.head_drops)
-        else:
-            output = self.head(h)
-        return output
+
+class VITBase(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=False):
+        super().__init__()
+        self.model = timm.create_model(model_name, pretrained=pretrained)
+        n_features = self.model.head.in_features
+        self.model.head = nn.Linear(n_features, n_class)
+
+    def forward(self, x):
+        x = self.model(x)
+        return x
+
+
+class DeitBase(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=False):
+        super().__init__()
+        self.model = timm.create_model(model_name, pretrained=pretrained)
+        n_features = self.model.head.in_features
+        self.model.head = nn.Linear(n_features, n_class)
+
+    def forward(self, x):
+        x = self.model(x)
+        return x

@@ -1,12 +1,13 @@
-name: tf_efficientnet_b4_ns
+name: deit_base_patch_16_384
 sync_dist: True # Use when training with multiple gpu
 arch:
-  _target_: src.networks.EfficientNetB3DSPlus
+  _target_: src.networks.DeitBase
+  model_name: deit_base_patch_16_384
   n_class: 2
-  model_name: tf_efficientnet_b4_ns
+  pretrained: True
 monitor: "val/loss"
 optimizer:
-  _target_: torch.optim.AdamW
+  _target_: torch.optim.Adam
   lr: 3e-4
   weight_decay: 1e-5
 lr_scheduler:

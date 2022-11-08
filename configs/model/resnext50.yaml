@@ -1,17 +1,23 @@
-name: vit_base_patch16_384
+name: resnext50_32x4d
 sync_dist: True # Use when training with multiple gpu
 arch:
-  _target_: src.networks.VITBase
-  model_name: vit_base_patch16_384
+  _target_: src.networks.ResNext
   n_class: 2
-  pretrained: True
+  model_name: resnext50_32x4d
 monitor: "val/loss"
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 1e-5
+  lr: 1e-4
   weight_decay: 1e-6
+# lr_scheduler:
+#   _target_: torch.optim.lr_scheduler.ReduceLROnPlateau
+#   mode: 'min'
+#   factor: 0.2
+#   patience: 5
+#   eps: 1e-6
+
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
   T_0: 10
   T_mult: 1
-  eta_min: 1e-7
+  eta_min: 1e-6

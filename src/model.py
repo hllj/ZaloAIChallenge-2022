@@ -25,6 +25,12 @@ class TIMMModel(LightningModule):
     def configure_optimizers(self):
         optimizer = instantiate(self.config.optimizer, params=self.model.parameters())
         scheduler = instantiate(self.config.lr_scheduler, optimizer=optimizer)
+        if "ReduceLROnPlateau" in self.config.lr_scheduler._target_:
+            return {
+                "optimizer": optimizer,
+                "lr_scheduler": scheduler,
+                "monitor": self.config.monitor,
+            }
         return [optimizer], [scheduler]
 
     def forward(self, x):
