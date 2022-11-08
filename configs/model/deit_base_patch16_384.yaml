@@ -1,8 +1,8 @@
-name: deit_base_patch_16_384
+name: deit_base_patch16_384
 sync_dist: True # Use when training with multiple gpu
 arch:
   _target_: src.networks.DeitBase
-  model_name: deit_base_patch_16_384
+  model_name: deit_base_patch16_384
   n_class: 2
   pretrained: True
 monitor: "val/loss"
