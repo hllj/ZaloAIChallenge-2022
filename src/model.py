@@ -17,7 +17,7 @@ class TIMMModel(LightningModule):
         super().__init__()
         self.config = config
         self.save_hyperparameters()
-        self.criterion = nn.CrossEntropyLoss()
+        self.criterion = LabelSmoothingLoss()#nn.CrossEntropyLoss()
         self.train_acc = torchmetrics.Accuracy()
         self.val_acc = torchmetrics.Accuracy()
         self.model = instantiate(self.config.arch)
@@ -42,16 +42,44 @@ class TIMMModel(LightningModule):
         loss, preds, targets = self.step(batch)
         acc = self.train_acc(preds, targets)
 
-        self.log("train/loss", loss, on_step=False, on_epoch=True, prog_bar=True)
-        self.log("train/acc", acc, on_step=False, on_epoch=True, prog_bar=True)
+        self.log(
+            "train/loss",
+            loss,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            sync_dist=self.config.sync_dist,
+        )
+        self.log(
+            "train/acc",
+            acc,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            sync_dist=self.config.sync_dist,
+        )
         return {"loss": loss}
 
     def validation_step(self, batch, batch_idx) -> None:
         val_loss, val_preds, val_targets = self.step(batch)
         val_acc = self.val_acc(val_preds, val_targets)
 
-        self.log("val/loss", val_loss, on_step=False, on_epoch=True, prog_bar=True)
-        self.log("val/acc", val_acc, on_step=False, on_epoch=True, prog_bar=True)
+        self.log(
+            "val/loss",
+            val_loss,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            sync_dist=self.config.sync_dist,
+        )
+        self.log(
+            "val/acc",
+            val_acc,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            sync_dist=self.config.sync_dist,
+        )
         return {"val_loss": val_loss}
 
     def test_step(self, batch, batch_idx) -> None:

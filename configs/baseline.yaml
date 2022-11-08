@@ -24,7 +24,7 @@ model_ckpt:
   filename: "checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}"
   monitor: val/loss
   save_last: True
-  save_top_k: 1
+  save_top_k: 5
   mode: min
   auto_insert_metric_name: False
 

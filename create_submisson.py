@@ -1,39 +1,39 @@
-import argparse
+import logging
 import os
 from glob import glob
 
+import hydra
 import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
+from omegaconf import DictConfig, OmegaConf
 from PIL import Image
 
 from src.dataset import get_image_transforms
 from src.model import TIMMModel
 
-from hydra import compose, initialize
-from omegaconf import OmegaConf
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Create submission")
-    parser.add_argument("-ckpt", "--checkpoint", required=True)
-    parser.add_argument("-cfg", "--config", required=True)
-    args = parser.parse_args()
+log = logging.getLogger(__name__)
 
 
-    cfg = OmegaConf.load(args.config)
-    checkpoint_path = args.checkpoint
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    ckpt = torch.load(checkpoint_path)
+@hydra.main(config_path="configs", config_name="inference")
+def main(infer_config: DictConfig) -> None:
+    checkpoint_path = infer_config.checkpoint
 
+    output_folder = "/".join(checkpoint_path.split("/")[:-2])
+    cfg = OmegaConf.load(
+        os.path.join(infer_config.work_dir, output_folder, ".hydra", "config.yaml")
+    )
     model = TIMMModel(cfg.model)
-    # model.load_from_checkpoint(checkpoint_path)
-    model.load_state_dict(ckpt['state_dict'])
+    ckpt = torch.load(os.path.join(infer_config.work_dir, checkpoint_path))
+    model.load_state_dict(ckpt["state_dict"])
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     model.eval().to(device)
-    transforms = get_image_transforms(cfg.dataset.crop_size, False)
-
+    transforms = get_image_transforms(infer_config.crop_size, False)
     submission_file = open("submission.csv", "w")
     submission_file.write("fname,liveness_score\n")
-    list_folder = sorted(glob("data/public/images/*"))
+    list_folder = sorted(
+        glob(os.path.join(infer_config.work_dir, "data/public/images/*"))
+    )
     for folder in list_folder:
         name = folder.split("/")[-1]
         list_filename = os.listdir(folder)
@@ -46,10 +46,13 @@ if __name__ == "__main__":
             image = image.to(device)
             logits = model(image)
             logits = F.softmax(logits, dim=-1)
-            # preds = torch.argmax(logits, dim=1).item()
-            preds = logits[0][1].item()
-            print("output", path, preds)
+            preds = logits[:, 1].item()
+            log.info(f"{path} : {preds}")
             preds_list.append(preds)
         outputs = sum(preds_list) / len(preds_list)
         submission_file.write(f"{name + '.mp4'},{outputs}\n")
     submission_file.close()
+
+
+if __name__ == "__main__":
+    main()

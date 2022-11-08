@@ -1,0 +1,12 @@
+work_dir: ${hydra:runtime.cwd}
+# name: prob_2nd_best
+# checkpoint: outputs/baseline-tf_efficientnet_b4_ns/2022-11-06-13-06-47/ckpts/checkpoint-epoch4-step1310-val_acc0.992-val_loss0.017.ckpt
+# crop_size: 512
+
+name: hvflip
+checkpoint: outputs/baseline_hvflip-tf_efficientnet_b4_ns/2022-11-07-09-32-01/ckpts/checkpoint-epoch13-step3668-val_acc0.992-val_loss0.019.ckpt
+crop_size: 512
+
+hydra:
+  run:
+    dir: ./outputs/inference_${name}/${now:%Y-%m-%d-%H-%M-%S}

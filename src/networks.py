@@ -35,7 +35,6 @@ class VITBasePatch16Res384(nn.Module):
         model_name,
         n_class=2,
         pretrained=False,
-        img_size=256,
         multi_drop=False,
         multi_drop_rate=0.5,
         att_layer=False,

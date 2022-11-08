@@ -11,6 +11,6 @@ optimizer:
   lr: 3e-5
   weight_decay: 1e-6
 lr_scheduler:
-  _target_: torch.optim.lr_scheduler.StepLR
-  step_size: 20
-  gamma: 0.1
+  _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+  min_lr : 1e-6
+  T_max : 100

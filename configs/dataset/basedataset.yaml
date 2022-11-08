@@ -5,3 +5,17 @@ crop_size: 384
 batch_size: 8
 num_workers: 1
 pin_memory: True
+
+augmentation:
+  aug1:
+    _target_: torchvision.transforms.RandomHorizontalFlip
+    p: 0.5
+  aug2:
+    _target_: torchvision.transforms.RandomVerticalFlip
+    p: 0.2
+  aug3:
+    _target_: torchvision.transforms.ColorJitter
+    brightness: 0.3
+    contrast: 0.3
+    saturation: 0.3
+    hue: 0
