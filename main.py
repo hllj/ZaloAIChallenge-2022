@@ -6,7 +6,7 @@ import pytorch_lightning as pl
 import torch
 import wandb
 from omegaconf import DictConfig, OmegaConf
-from pytorch_lightning.callbacks import Callback, ModelCheckpoint, RichProgressBar
+from pytorch_lightning.callbacks import Callback, ModelCheckpoint, RichProgressBar, LearningRateMonitor
 from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
@@ -89,6 +89,7 @@ def train(config):
     callbacks = []
     callbacks.append(ModelCheckpoint(**config.model_ckpt))
     callbacks.append(RichProgressBar(config.refresh_rate))
+    callbacks.append(LearningRateMonitor(logging_interval='epoch'))
     # callbacks.append(LogPredictionSamplesCallback(wandb_logger))
 
     OmegaConf.set_struct(config, False)
