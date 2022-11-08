@@ -13,7 +13,7 @@ logging:
 
 defaults:
   - dataset: basedataset
-  - model: tf_efficientnet_b4_ns
+  - model: swin_base_patch4_window12_384
   - trainer: default
 
 # Logging, progress bar

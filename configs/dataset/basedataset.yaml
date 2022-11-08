@@ -1,7 +1,7 @@
 train_list: ${work_dir}/data/train/train.csv
 val_list: ${work_dir}/data/train/val.csv
 data_dir: ${work_dir}/data
-crop_size: 512
-batch_size: 16
-num_workers: 4
+crop_size: 384
+batch_size: 8
+num_workers: 1
 pin_memory: True

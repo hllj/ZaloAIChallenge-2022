@@ -10,15 +10,26 @@ from PIL import Image
 from src.dataset import get_image_transforms
 from src.model import TIMMModel
 
+from hydra import compose, initialize
+from omegaconf import OmegaConf
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Create submission")
     parser.add_argument("-ckpt", "--checkpoint", required=True)
+    parser.add_argument("-cfg", "--config", required=True)
     args = parser.parse_args()
+
+
+    cfg = OmegaConf.load(args.config)
     checkpoint_path = args.checkpoint
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    model = TIMMModel.load_from_checkpoint(checkpoint_path)
+    ckpt = torch.load(checkpoint_path)
+
+    model = TIMMModel(cfg.model)
+    # model.load_from_checkpoint(checkpoint_path)
+    model.load_state_dict(ckpt['state_dict'])
     model.eval().to(device)
-    transforms = get_image_transforms(512, False)
+    transforms = get_image_transforms(cfg.dataset.crop_size, False)
 
     submission_file = open("submission.csv", "w")
     submission_file.write("fname,liveness_score\n")
@@ -35,7 +46,8 @@ if __name__ == "__main__":
             image = image.to(device)
             logits = model(image)
             logits = F.softmax(logits, dim=-1)
-            preds = torch.argmax(logits, dim=1).item()
+            # preds = torch.argmax(logits, dim=1).item()
+            preds = logits[0][1].item()
             print("output", path, preds)
             preds_list.append(preds)
         outputs = sum(preds_list) / len(preds_list)

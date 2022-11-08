@@ -113,7 +113,8 @@ class LivenessDatamodule(LightningDataModule):
 def get_image_transforms(input_size, augment):
     transforms = []
     if augment:
-        transforms += [tvf.Resize([input_size, input_size]), tvf.RandomHorizontalFlip()]
+        transforms += [tvf.Resize([input_size, input_size]), tvf.RandomHorizontalFlip(), \
+        tvf.RandomVerticalFlip(0.1), tvf.ColorJitter()]
     else:
         transforms += [tvf.Resize([input_size, input_size])]
     transforms += [

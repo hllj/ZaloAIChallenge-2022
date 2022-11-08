@@ -105,3 +105,46 @@ class VITBasePatch16Res384(nn.Module):
         else:
             output = self.head(h)
         return output
+
+
+class SwinTransformerv2(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=True):
+        super().__init__()
+        backbone = timm.create_model(model_name, pretrained=pretrained)
+        n_features = backbone.head.in_features
+        self.backbone = backbone
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.classifier = nn.Linear(n_features, n_class)
+
+    def forward_features(self, x):
+        x = self.backbone.forward_features(x)
+        return x
+
+    def forward(self, x):
+        feats = self.forward_features(x)
+        x = feats.mean(dim=1)
+        x = self.classifier(x)
+        return x
+
+class SwinTransformer(nn.Module):
+    def __init__(self, model_name, n_class=2, pretrained=True):
+        super().__init__()
+        backbone = timm.create_model(model_name, pretrained=pretrained)
+        n_features = backbone.head.in_features
+        self.backbone = backbone
+        # print(self.backbone)
+        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.dropout = nn.Dropout(0.5)
+        self.classifier = nn.Linear(n_features, n_class)
+
+
+    def forward_features(self, x):
+        x = self.backbone.forward_features(x)
+        return x
+
+    def forward(self, x):
+        x = self.forward_features(x)
+        x = self.dropout(x)
+        x = x.mean(dim=1)
+        x = self.classifier(x)
+        return x
