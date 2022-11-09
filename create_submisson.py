@@ -28,7 +28,7 @@ def main(infer_config: DictConfig) -> None:
     model.load_state_dict(ckpt["state_dict"])
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model.eval().to(device)
-    transforms = get_image_transforms(infer_config.crop_size, False)
+    transforms = get_image_transforms(infer_config.crop_size, False, None)
     submission_file = open("submission.csv", "w")
     submission_file.write("fname,liveness_score\n")
     list_folder = sorted(
@@ -36,9 +36,9 @@ def main(infer_config: DictConfig) -> None:
     )
     for folder in list_folder:
         name = folder.split("/")[-1]
-        list_filename = os.listdir(folder)
+        list_filename = sorted(os.listdir(folder))
         preds_list = []
-        for filename in list_filename:
+        for idx, filename in enumerate(list_filename):
             path = os.path.join(folder, filename)
             image = Image.open(path)
             image = transforms(image)
@@ -47,7 +47,7 @@ def main(infer_config: DictConfig) -> None:
             logits = model(image)
             logits = F.softmax(logits, dim=-1)
             preds = logits[:, 1].item()
-            log.info(f"{path} : {preds}")
+            log.info(f"{path} {idx}: {preds}")
             preds_list.append(preds)
         outputs = sum(preds_list) / len(preds_list)
         submission_file.write(f"{name + '.mp4'},{outputs}\n")

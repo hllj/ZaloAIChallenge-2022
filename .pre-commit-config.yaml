@@ -99,5 +99,5 @@ repos:
     hooks:
       - id: codespell
         args:
-          - --skip=logs/**,data/**
+          - --skip=logs/**,data/**,evaluate.py
           - --ignore-words-list=abc,def,cna
