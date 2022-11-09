@@ -5,6 +5,18 @@ import hydra
 import pytorch_lightning as pl
 import torch
 import wandb
+import random
+import numpy as np
+
+### seed
+seed = 42
+random.seed(seed)
+np.random.seed(seed)
+torch.manual_seed(seed)
+if torch.cuda.is_available():
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark= False
+
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.callbacks import Callback, ModelCheckpoint, RichProgressBar
 from pytorch_lightning.loggers import WandbLogger
@@ -76,7 +88,7 @@ class LogPredictionSamplesCallback(Callback):
 
 
 def train(config):
-    config.seed = pl.seed_everything(seed=config.seed, workers=True)
+    # config.seed = pl.seed_everything(seed=config.seed, workers=True)
 
     wandb_logger = WandbLogger(
         project="zalo_2022",
