@@ -3,6 +3,7 @@ import os
 
 import cv2
 import numpy as np
+from PIL import Image
 
 
 def read_video(name):
@@ -30,7 +31,7 @@ def read_video(name):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Extract 1 frame/sec")
     parser.add_argument("-i", "--input", default="train/videos")
-    parser.add_argument("-o", "--output", default="train/images")
+    parser.add_argument("-o", "--output", default="train/pil_images")
     args = parser.parse_args()
     input_dir = args.input
     output_dir = args.output
@@ -48,4 +49,7 @@ if __name__ == "__main__":
             os.mkdir(output)
 
         for idx, frame in enumerate(frames):
-            cv2.imwrite(os.path.join(output, str(idx) + ".jpg"), frame)
+            # cv2.imwrite(os.path.join(output, str(idx) + ".jpg"), frame)
+            img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            im_pil = Image.fromarray(img)
+            im_pil.save(os.path.join(output, str(idx) + ".png"))

@@ -2,7 +2,9 @@ import logging
 import os
 from glob import glob
 
+import cv2
 import hydra
+import numpy as np
 import pytorch_lightning as pl
 import torch
 import torch.nn.functional as F
@@ -32,7 +34,7 @@ def main(infer_config: DictConfig) -> None:
     submission_file = open("submission.csv", "w")
     submission_file.write("fname,liveness_score\n")
     list_folder = sorted(
-        glob(os.path.join(infer_config.work_dir, "data/public/images/*"))
+        glob(os.path.join(infer_config.work_dir, "data/public/pil_images/*"))
     )
     for folder in list_folder:
         name = folder.split("/")[-1]
@@ -49,9 +51,45 @@ def main(infer_config: DictConfig) -> None:
             preds = logits[:, 1].item()
             log.info(f"{path} {idx}: {preds}")
             preds_list.append(preds)
+            # only extract frame 0
+            break
         outputs = sum(preds_list) / len(preds_list)
         submission_file.write(f"{name + '.mp4'},{outputs}\n")
     submission_file.close()
+
+    # list_video = sorted(
+    #     glob(os.path.join(infer_config.work_dir, "data/public/videos/*"))
+    # )
+    # for video_path in list_video:
+    #     name = video_path.split('/')[-1]
+    #     cap = cv2.VideoCapture(video_path)
+    #     frames = []
+    #     fps = cap.get(cv2.CAP_PROP_FPS)
+    #     if not fps:
+    #         fps = 25
+    #     count = 0
+    #     preds_list = []
+    #     while cap.isOpened():
+    #         ret, frame = cap.read()
+    #         if isinstance(frame, np.ndarray):
+    #             if int(count % round(fps)) == 0:
+    #                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    #                 image = Image.fromarray(frame)
+    #                 image = transforms(image)
+    #                 image.unsqueeze_(dim=0)
+    #                 image = image.to(device)
+    #                 logits = model(image)
+    #                 logits = F.softmax(logits, dim=-1)
+    #                 preds = logits[:, 1].item()
+    #                 log.info(f"{video_path} {count}: {preds}")
+    #                 preds_list.append(preds)
+    #             count += 1
+    #             break
+    #         else:
+    #             break
+    #     outputs = sum(preds_list) / len(preds_list)
+    #     submission_file.write(f"{name},{outputs}\n")
+    # submission_file.close()
 
 
 if __name__ == "__main__":
