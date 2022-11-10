@@ -7,7 +7,6 @@ arch:
   pretrained: True
 monitor: "val/loss"
 loss:
-  # _target_: src.loss.LabelSmoothingLoss
   _target_: torch.nn.CrossEntropyLoss
   label_smoothing: 0.1
 

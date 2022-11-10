@@ -12,10 +12,10 @@ def create_csv(fname, y, input_dir, csv_filename):
     for filename, label in zip(fname, y):
         name = filename.split(".")[0]
         list_image_filename = sorted(
-            os.listdir(os.path.join(input_dir, "images", name))
+            os.listdir(os.path.join(input_dir, "pil_images", name))
         )
         for image_filename in list_image_filename:
-            image_path = os.path.join(input_dir, "images", name, image_filename)
+            image_path = os.path.join(input_dir, "pil_images", name, image_filename)
             csv_file.write(f"{image_path},{label}\n")
     csv_file.close()
 
