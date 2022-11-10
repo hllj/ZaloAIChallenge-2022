@@ -63,8 +63,8 @@ Run command to extract frames and split data
 cd data/
 unzip train.zip
 unzip public.zip
-python get_frame.py -i train/videos/ -o train/images/
-python get_frame.py -i public/videos/ -o public/images/
+python get_frame.py -i train/videos/ -o train/pil_images/
+python get_frame.py -i public/videos/ -o public/pil_images/
 python create_data.py -dir train/ -l label.csv
 ```
 
