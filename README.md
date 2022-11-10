@@ -73,6 +73,15 @@ val_list: data/train/val.csv
 
 ## Running
 
+**Run**
 ```bash
 CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py
+```
+
+
+**Multi config Running**
+Edit in hydra.sweeper.params in config/baseline.yaml
+Run:
+```bash
+CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py -m
 ```

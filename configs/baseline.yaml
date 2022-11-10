@@ -13,6 +13,7 @@ logging:
 
 defaults:
   - model: tf_efficientnet_b4_ns
+  - _self_
 
 dataset:
   train_list: ${work_dir}/data/train/train.csv
@@ -28,7 +29,14 @@ dataset:
       p: 0.5
     aug2:
       _target_: torchvision.transforms.RandomVerticalFlip
-      p: 0.5
+      p: 0.2
+    aug3:
+      _target_: torchvision.transforms.ColorJitter
+      brightness: 0.3
+      contrast: 0.0
+      saturation: 0.0
+      hue: 0.0
+
 
 trainer:
   # GPU related
@@ -41,7 +49,7 @@ trainer:
   sync_batchnorm: False
   # Training related
   # max_steps: 100000
-  max_epochs: 30
+  max_epochs: 20
   # limit_train_batches: 1.0
   # gradient_clip_val: 0.1 # gradient clipping max norm
   # gradient_clip_algorithm: "norm"
@@ -54,7 +62,7 @@ model_ckpt:
   filename: "checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}"
   monitor: ${model.monitor}
   save_last: True
-  save_top_k: 1
+  save_top_k: 2
   mode: min
   auto_insert_metric_name: False
 
@@ -67,3 +75,14 @@ ddp_plugin:
 hydra:
   run:
     dir: ./outputs/${name}-${model.name}/${now:%Y-%m-%d-%H-%M-%S}
+  sweep:
+    dir: ./multirun/${name}-${model.name}
+    subdir: ${now:%Y-%m-%d-%H-%M-%S}
+  sweeper:
+    params:
+      dataset.augmentation.aug2.p: 0.0,0.1,0.2
+      dataset.augmentation.aug3.brightness: 0.0,0.3
+      dataset.augmentation.aug3.contrast: 0.0,0.3
+      model.loss.label_smoothing: 0.0,0.1
+      model.optimizer.lr: 1e-4,3e-4,3e-5,1e-5
+      model.lr_scheduler.step_size: 5,10

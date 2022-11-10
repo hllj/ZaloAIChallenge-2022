@@ -8,9 +8,9 @@ dependencies:
       - pytorch-lightning==1.7.*
       - torchmetrics[image]
       - wandb
-      - hydra-core==1.1.0
-      - hydra-colorlog==1.1.0
-      - hydra-optuna-sweeper==1.1.0
+      - hydra-core==1.2.0
+      - hydra-colorlog==1.2.0
+      - hydra-optuna-sweeper==1.2.0
       - black
       - flake8
       - isort
@@ -21,3 +21,5 @@ dependencies:
       - tqdm
       - numpy
       - seaborn
+      - opencv-python
+      - timm==0.6.11

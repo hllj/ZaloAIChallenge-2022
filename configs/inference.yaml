@@ -3,10 +3,11 @@ work_dir: ${hydra:runtime.cwd}
 # checkpoint: outputs/baseline-tf_efficientnet_b4_ns/2022-11-06-13-06-47/ckpts/checkpoint-epoch4-step1310-val_acc0.992-val_loss0.017.ckpt
 # crop_size: 512
 
-name: hvflip
-checkpoint: outputs/baseline_hvflip-tf_efficientnet_b4_ns/2022-11-07-09-32-01/ckpts/checkpoint-epoch13-step3668-val_acc0.992-val_loss0.019.ckpt
-crop_size: 512
+name: swin_base_patch4_window12_384
+name_time: 2022-11-09-18-03-03
+checkpoint: outputs/baseline-swin_base_patch4_window12_384/swin_base_patch4_window12_384_2022-11-09-18-03-03/ckpts/checkpoint-epoch8-step4716-val_acc0.987-val_loss0.218.ckpt
+crop_size: 384
 
 hydra:
   run:
-    dir: ./outputs/inference_${name}/${now:%Y-%m-%d-%H-%M-%S}
+    dir: ./outputs/inference_${name}/${name_time}
