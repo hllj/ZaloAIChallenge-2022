@@ -6,17 +6,6 @@ import hydra
 import pandas as pd
 import torch
 import torchvision.transforms as tvf
-from albumentations import (
-    Compose,
-    HorizontalFlip,
-    Normalize,
-    RandomResizedCrop,
-    Resize,
-    ShiftScaleRotate,
-    Transpose,
-    VerticalFlip,
-)
-from albumentations.pytorch import ToTensorV2
 from PIL import Image
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader, Dataset
@@ -87,32 +76,6 @@ class LivenessDatamodule(LightningDataModule):
             pin_memory=self.config.pin_memory,
             drop_last=False,
         )
-
-
-# def get_image_transforms(input_size, augment):
-#     if augment:
-#         return Compose([
-#             Resize(input_size, input_size),
-#             # Transpose(p=0.5),
-#             HorizontalFlip(p=0.5),
-#             # VerticalFlip(p=0.5),
-#             # ShiftScaleRotate(p=0.5),
-#             Normalize(
-#                 mean=[0.485, 0.456, 0.406],
-#                 std=[0.229, 0.224, 0.225],
-#             ),
-#             ToTensorV2(),
-#         ])
-#     else:
-#         return Compose([
-#             Resize(input_size, input_size),
-#             Normalize(
-#                 mean=[0.485, 0.456, 0.406],
-#                 std=[0.229, 0.224, 0.225],
-#             ),
-#             ToTensorV2(),
-#         ])
-
 
 def get_image_transforms(input_size, augment, augment_config=None):
     transforms = []
