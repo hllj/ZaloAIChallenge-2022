@@ -74,7 +74,7 @@ ddp_plugin:
 
 hydra:
   run:
-    dir: ./outputs/${name}-${model.name}/${model.name}_${now:%Y-%m-%d-%H-%M-%S}
+    dir: ./outputs/${name}-${model.name}/${now:%Y-%m-%d-%H-%M-%S}
   sweep:
     dir: ./multirun/${name}-${model.name}
     subdir: ${now:%Y-%m-%d-%H-%M-%S}
