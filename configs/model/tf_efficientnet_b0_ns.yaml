@@ -6,6 +6,9 @@ arch:
   model_name: tf_efficientnet_b0_ns
   pretrained: True
 monitor: "val/loss"
+loss:
+  _target_: torch.nn.CrossEntropyLoss
+  label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
   lr: 3e-4

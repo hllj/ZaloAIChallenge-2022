@@ -9,7 +9,6 @@ monitor: "val/loss"
 loss:
   _target_: torch.nn.CrossEntropyLoss
   label_smoothing: 0.1
-
 optimizer:
   _target_: torch.optim.AdamW
   lr: 3e-5

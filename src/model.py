@@ -18,7 +18,6 @@ class TIMMModel(LightningModule):
         self.config = config
         self.save_hyperparameters()
         self.criterion = instantiate(self.config.loss)
-        # self.criterion = nn.CrossEntropyLoss()
         self.train_acc = torchmetrics.Accuracy()
         self.val_acc = torchmetrics.Accuracy()
         self.model = instantiate(self.config.arch)
