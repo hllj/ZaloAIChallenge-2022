@@ -16,7 +16,6 @@ class EfficientNetB3DSPlus(nn.Module):
             n_features = backbone.fc.in_features
         self.backbone = nn.Sequential(*backbone.children())[:-2]
         self.pool = nn.AdaptiveAvgPool2d((1, 1))
-        self.dropout = nn.Dropout(0.5)
         self.classifier = nn.Linear(n_features, n_class)
 
     def forward_features(self, x):
@@ -26,7 +25,6 @@ class EfficientNetB3DSPlus(nn.Module):
     def forward(self, x):
         feats = self.forward_features(x)
         x = self.pool(feats).view(x.size(0), -1)
-        x = self.dropout(x)
         x = self.classifier(x)
         return x
 
