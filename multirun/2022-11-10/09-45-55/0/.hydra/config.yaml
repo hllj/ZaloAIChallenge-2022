@@ -1,0 +1,69 @@
+model:
+  name: swin_base_patch4_window12_384
+  sync_dist: true
+  arch:
+    _target_: src.networks.SwinTransformer
+    n_class: 2
+    model_name: swin_base_patch4_window12_384
+    pretrained: true
+  monitor: val/loss
+  loss:
+    _target_: torch.nn.CrossEntropyLoss
+    label_smoothing: 0.1
+  optimizer:
+    _target_: torch.optim.AdamW
+    lr: 3.0e-05
+    weight_decay: 1.0e-06
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.StepLR
+    step_size: 5
+    gamma: 0.2
+name: baseline
+state: train
+seed: 42
+work_dir: ${hydra:runtime.cwd}
+logging:
+  root: ./logs
+dataset:
+  train_list: ${work_dir}/data/train/train.csv
+  val_list: ${work_dir}/data/train/val.csv
+  data_dir: ${work_dir}/data
+  crop_size: 384
+  batch_size: 8
+  num_workers: 4
+  pin_memory: true
+  augmentation:
+    aug1:
+      _target_: torchvision.transforms.RandomHorizontalFlip
+      p: 0.5
+    aug2:
+      _target_: torchvision.transforms.RandomVerticalFlip
+      p: 0.0
+    aug3:
+      _target_: torchvision.transforms.ColorJitter
+      brightness: 0.3
+      contrast: 0.0
+      saturation: 0.0
+      hue: 0.0
+trainer:
+  precision: 16
+  accelerator: gpu
+  devices: -1
+  num_nodes: 1
+  strategy: null
+  benchmark: true
+  sync_batchnorm: false
+  max_epochs: 20
+refresh_rate: 10
+model_ckpt:
+  dirpath: ckpts/
+  filename: checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}
+  monitor: ${model.monitor}
+  save_last: true
+  save_top_k: 2
+  mode: min
+  auto_insert_metric_name: false
+ddp_plugin:
+  find_unused_params: true
+  fp16_hook: true
+  static_graph: false

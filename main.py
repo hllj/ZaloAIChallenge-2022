@@ -1,10 +1,21 @@
 import logging
 from pathlib import Path
-
+import random
+import numpy as np
 import hydra
 import pytorch_lightning as pl
 import torch
 import wandb
+
+def seed_everywhere(seed):
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark= False
+seed_everywhere(42)
+
 from omegaconf import DictConfig, OmegaConf
 from pytorch_lightning.callbacks import Callback, ModelCheckpoint, RichProgressBar, LearningRateMonitor
 from pytorch_lightning.loggers import WandbLogger
@@ -74,9 +85,8 @@ class LogPredictionSamplesCallback(Callback):
                 key="val/visualization", images=images, caption=captions
             )
 
-
 def train(config):
-    config.seed = pl.seed_everything(seed=config.seed, workers=True)
+    # config.seed = pl.seed_everything(seed=config.seed, workers=True)
 
     wandb_logger = WandbLogger(
         project="zalo_2022",

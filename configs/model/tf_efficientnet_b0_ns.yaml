@@ -4,15 +4,13 @@ arch:
   _target_: src.networks.EfficientNetB3DSPlus
   n_class: 2
   model_name: tf_efficientnet_b0_ns
+  pretrained: True
 monitor: "val/loss"
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 1e-4
-  weight_decay: 1e-6
+  lr: 3e-4
+  weight_decay: 1e-5
 lr_scheduler:
-  _target_: torch.optim.lr_scheduler.CyclicLR
-  base_lr: 0.001
-  max_lr: 0.1
-  step_size_up: 5
-  mode: "exp_range"
-  gamma: 0.85
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 5
+  gamma: 0.5

@@ -12,14 +12,14 @@ logging:
   root: ./logs
 
 defaults:
-  - model: tf_efficientnet_b0_ns
+  - model: swin_base_patch4_window12_384
 
 dataset:
   train_list: ${work_dir}/data/train/train.csv
   val_list: ${work_dir}/data/train/val.csv
   data_dir: ${work_dir}/data
-  crop_size: 512
-  batch_size: 32
+  crop_size: 384
+  batch_size: 8
   num_workers: 4
   pin_memory: True
   augmentation:
@@ -31,10 +31,10 @@ dataset:
       p: 0.2
     aug3:
       _target_: torchvision.transforms.ColorJitter
-      brightness: 0.5
-      contrast: 0.5
-      saturation: 0.5
-      hue: 0.5
+      brightness: 0.3
+      contrast: 0.0
+      saturation: 0.0
+      hue: 0.0
 
 
 trainer:
@@ -48,7 +48,7 @@ trainer:
   sync_batchnorm: False
   # Training related
   # max_steps: 100000
-  max_epochs: 30
+  max_epochs: 20
   # limit_train_batches: 1.0
   # gradient_clip_val: 0.1 # gradient clipping max norm
   # gradient_clip_algorithm: "norm"
@@ -61,7 +61,7 @@ model_ckpt:
   filename: "checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}"
   monitor: ${model.monitor}
   save_last: True
-  save_top_k: 5
+  save_top_k: 2
   mode: min
   auto_insert_metric_name: False
 
@@ -73,4 +73,4 @@ ddp_plugin:
 
 hydra:
   run:
-    dir: ./outputs/${name}-${model.name}/${now:%Y-%m-%d-%H-%M-%S}
+    dir: ./outputs/${name}-${model.name}/${model.name}_${now:%Y-%m-%d-%H-%M-%S}

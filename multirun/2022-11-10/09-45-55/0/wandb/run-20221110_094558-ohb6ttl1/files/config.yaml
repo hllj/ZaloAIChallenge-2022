@@ -1,0 +1,4064 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.13.5
+    framework: lightning
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    m:
+    - 1: trainer/global_step
+      6:
+      - 3
+    - 1: lr-AdamW
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.classifier\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.norm\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.1\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.3\.blocks\.0\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.reduction\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.reduction\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.reduction\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.downsample\.norm\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.17\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.16\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.15\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.14\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.13\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.12\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.11\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.10\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.9\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.8\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.7\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.6\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.5\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.4\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.3\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.2\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.1\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.2\.blocks\.0\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.reduction\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.reduction\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.reduction\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.downsample\.norm\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.1\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.1\.blocks\.0\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.reduction\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.reduction\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.reduction\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.downsample\.norm\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.1\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.mlp\.fc1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm2\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.relative_position_bias_table._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.relative_position_bias_table.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.relative_position_bias_table.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.attn\.qkv\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.layers\.0\.blocks\.0\.norm1\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.norm\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.weight._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.weight.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.weight.bins
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.bias._type
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.bias.values
+      5: 1
+      6:
+      - 1
+    - 1: gradients/model\.backbone\.patch_embed\.proj\.bias.bins
+      5: 1
+      6:
+      - 1
+    - 1: val/loss
+      5: 1
+      6:
+      - 1
+    - 1: val/acc
+      5: 1
+      6:
+      - 1
+    - 1: epoch
+      5: 1
+      6:
+      - 1
+    - 1: train/loss
+      5: 1
+      6:
+      - 1
+    - 1: train/acc
+      5: 1
+      6:
+      - 1
+    python_version: 3.9.13
+    start_time: 1668048358.221805
+    t:
+      1:
+      - 1
+      - 5
+      - 9
+      - 41
+      - 49
+      - 50
+      - 53
+      - 55
+      - 63
+      - 80
+      2:
+      - 1
+      - 5
+      - 9
+      - 41
+      - 49
+      - 50
+      - 53
+      - 55
+      - 63
+      - 80
+      3:
+      - 1
+      - 7
+      - 13
+      - 23
+      4: 3.9.13
+      5: 0.13.5
+      8:
+      - 6
+config/arch/_target_:
+  desc: null
+  value: src.networks.SwinTransformer
+config/arch/model_name:
+  desc: null
+  value: swin_base_patch4_window12_384
+config/arch/n_class:
+  desc: null
+  value: 2
+config/arch/pretrained:
+  desc: null
+  value: true
+config/loss/_target_:
+  desc: null
+  value: torch.nn.CrossEntropyLoss
+config/loss/label_smoothing:
+  desc: null
+  value: 0.1
+config/lr_scheduler/_target_:
+  desc: null
+  value: torch.optim.lr_scheduler.StepLR
+config/lr_scheduler/gamma:
+  desc: null
+  value: 0.2
+config/lr_scheduler/step_size:
+  desc: null
+  value: 5
+config/monitor:
+  desc: null
+  value: val/loss
+config/name:
+  desc: null
+  value: swin_base_patch4_window12_384
+config/optimizer/_target_:
+  desc: null
+  value: torch.optim.AdamW
+config/optimizer/lr:
+  desc: null
+  value: 3.0e-05
+config/optimizer/weight_decay:
+  desc: null
+  value: 1.0e-06
+config/sync_dist:
+  desc: null
+  value: true

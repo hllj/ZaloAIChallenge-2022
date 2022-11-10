@@ -6,11 +6,16 @@ arch:
   model_name: swin_base_patch4_window12_384
   pretrained: True
 monitor: "val/loss"
+loss:
+  # _target_: src.loss.LabelSmoothingLoss
+  _target_: torch.nn.CrossEntropyLoss
+  label_smoothing: 0.1
+
 optimizer:
   _target_: torch.optim.AdamW
   lr: 3e-5
   weight_decay: 1e-6
 lr_scheduler:
-  _target_: torch.optim.lr_scheduler.CosineAnnealingLR
-  eta_min : 1e-6
-  T_max : 100
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 5
+  gamma: 0.2
