@@ -12,14 +12,15 @@ logging:
   root: ./logs
 
 defaults:
-  - model: swin_base_patch4_window12_384
+  - model: tf_efficientnet_b4_ns
+  - _self_
 
 dataset:
   train_list: ${work_dir}/data/train/train.csv
   val_list: ${work_dir}/data/train/val.csv
   data_dir: ${work_dir}/data
-  crop_size: 384
-  batch_size: 8
+  crop_size: 512
+  batch_size: 16
   num_workers: 4
   pin_memory: True
   augmentation:
@@ -74,3 +75,14 @@ ddp_plugin:
 hydra:
   run:
     dir: ./outputs/${name}-${model.name}/${model.name}_${now:%Y-%m-%d-%H-%M-%S}
+  sweep:
+    dir: ./multirun/${name}-${model.name}
+    subdir: ${now:%Y-%m-%d-%H-%M-%S}
+  sweeper:
+    params:
+      dataset.augmentation.aug2.p: 0.0,0.1,0.2
+      dataset.augmentation.aug3.brightness: 0.0,0.3
+      dataset.augmentation.aug3.contrast: 0.0,0.3
+      model.loss.label_smoothing: 0.0,0.1
+      model.optimizer.lr: 1e-4,3e-4,3e-5,1e-5
+      model.lr_scheduler.step_size: 5,10

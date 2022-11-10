@@ -89,12 +89,13 @@ class LogPredictionSamplesCallback(Callback):
 
 def train(config):
     # config.seed = pl.seed_everything(seed=config.seed, workers=True)
-
+    
     wandb_logger = WandbLogger(
         project="zalo_2022",
         log_model=False,
         settings=wandb.Settings(start_method="fork"),
         name=Path.cwd().stem,
+        dir=Path.cwd()
     )
 
     # Create callbacks
@@ -137,8 +138,9 @@ def train(config):
         **config.trainer,
     )
 
-    wandb_logger.watch(model, log_graph=False)
+    wandb_logger.watch(model, log="parameters", log_graph=False)
     trainer.fit(model, datamodule=datamodule)
+    wandb.finish()
 
 
 @hydra.main(config_path="configs", config_name="baseline")
