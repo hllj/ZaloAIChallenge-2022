@@ -82,7 +82,7 @@ unzip public_test_2.zip
 python get_frame.py -i train/videos/ -o train/padding_images/ -p
 python get_frame.py -i public/videos/ -o public/padding_images/ -p
 python get_frame.py -i public_test_2/videos/ -o public_test_2/padding_images/ -p
-python create_data.py -dir train/ -images images -l label.csv
+python create_data.py -dir train/ -images padding_images -l label.csv
 ```
 
 train_list: data/train/train.csv
