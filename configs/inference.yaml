@@ -7,6 +7,7 @@ name: swin_base_patch4_window12_384
 name_time: 2022-11-09-18-03-03
 checkpoint: outputs/baseline-swin_base_patch4_window12_384/swin_base_patch4_window12_384_2022-11-09-18-03-03/ckpts/checkpoint-epoch8-step4716-val_acc0.987-val_loss0.218.ckpt
 crop_size: 384
+images_dir: data/public/images/*
 
 hydra:
   run:
