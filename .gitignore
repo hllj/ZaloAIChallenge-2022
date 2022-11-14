@@ -134,5 +134,7 @@ ckpts/
 logs/
 data/train/
 data/public/
-data/public_test.zip
-data/train.zip
+data/public_test_2/
+data/*.zip
+data/*.png
+data/*.jpg
