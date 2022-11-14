@@ -5,6 +5,9 @@ arch:
   n_class: 2
   model_name: resnext50_32x4d
 monitor: "val/loss"
+loss:
+  _target_: torch.nn.CrossEntropyLoss
+  label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
   lr: 1e-4

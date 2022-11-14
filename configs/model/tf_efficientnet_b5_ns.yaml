@@ -5,6 +5,9 @@ arch:
   n_class: 2
   model_name: tf_efficientnet_b5_ns
 monitor: "val/loss"
+loss:
+  _target_: torch.nn.CrossEntropyLoss
+  label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
   lr: 1e-4
