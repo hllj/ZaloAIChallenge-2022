@@ -57,15 +57,32 @@ Define the variables you need for running your model, including your model's hyp
 
 Download train.zip and public.zip, place in data/
 
-Run command to extract frames and split data
+Run command to extract frames and split data. Then choose option 1 or 2 to create type of data (no padding or padding)
+
+#### Option 1: No padding, keep resolution
 
 ```bash
 cd data/
 unzip train.zip
 unzip public.zip
+unzip public_test_2.zip
 python get_frame.py -i train/videos/ -o train/images/
 python get_frame.py -i public/videos/ -o public/images/
-python create_data.py -dir train/ -l label.csv
+python get_frame.py -i public_test_2/videos/ -o public_test_2/images/
+python create_data.py -dir train/ -images images -l label.csv
+```
+
+#### Option 2: Add padding, ratio 1:1
+
+```bash
+cd data/
+unzip train.zip
+unzip public.zip
+unzip public_test_2.zip
+python get_frame.py -i train/videos/ -o train/padding_images/ -p
+python get_frame.py -i public/videos/ -o public/padding_images/ -p
+python get_frame.py -i public_test_2/videos/ -o public_test_2/padding_images/ -p
+python create_data.py -dir train/ -images images -l label.csv
 ```
 
 train_list: data/train/train.csv
@@ -74,14 +91,15 @@ val_list: data/train/val.csv
 ## Running
 
 **Run**
+
 ```bash
 CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py
 ```
 
-
 **Multi config Running**
 Edit in hydra.sweeper.params in config/baseline.yaml
 Run:
+
 ```bash
 CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py -m
 ```
