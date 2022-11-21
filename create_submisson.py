@@ -34,7 +34,7 @@ def main(infer_config: DictConfig) -> None:
     submission_file = open("submission.csv", "w")
     submission_file.write("fname,liveness_score\n")
     list_folder = sorted(
-        glob(os.path.join(infer_config.work_dir, "data/public/pil_images/*"))
+        glob(os.path.join(infer_config.work_dir, infer_config.images_dir))
     )
     for folder in list_folder:
         name = folder.split("/")[-1]
