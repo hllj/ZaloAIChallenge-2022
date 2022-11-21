@@ -1,6 +1,6 @@
 name: baseline
 state: train # train/test/debug
-seed: 42
+seed: 6789
 
 # path to original working directory
 # hydra hijacks working directory by changing it to the current log directory,
@@ -12,31 +12,45 @@ logging:
   root: ./logs
 
 defaults:
-  - model: tf_efficientnet_b4_ns
+  - model: swin_base_patch4_window12_384
   - _self_
 
 dataset:
   train_list: ${work_dir}/data/train/train.csv
   val_list: ${work_dir}/data/train/val.csv
   data_dir: ${work_dir}/data
-  crop_size: 512
-  batch_size: 16
+  crop_size: 384
+  batch_size: 32
   num_workers: 4
   pin_memory: True
   augmentation:
+    aug0:
+      _target_: torchvision.transforms.RandomResizedCrop
+      size: ${dataset.crop_size}
+      scale:
+        - 0.49
+        - 1.0
     aug1:
       _target_: torchvision.transforms.RandomHorizontalFlip
       p: 0.5
     aug2:
-      _target_: torchvision.transforms.RandomVerticalFlip
-      p: 0.2
+      _target_: torchvision.transforms.GaussianBlur
+      kernel_size: 3
+      sigma:
+        - 0.2
+        - 2.0
+    # aug3:
+    #   _target_: torchvision.transforms.RandomVerticalFlip
+    #   p: 0.2
     aug3:
       _target_: torchvision.transforms.ColorJitter
-      brightness: 0.3
-      contrast: 0.0
+      brightness: 0.0
+      contrast: 0.2
       saturation: 0.0
       hue: 0.0
-
+    aug4:
+      _target_: torchvision.transforms.RandomPosterize
+      bits: 7
 
 trainer:
   # GPU related
@@ -55,14 +69,14 @@ trainer:
   # gradient_clip_algorithm: "norm"
 
 # Logging, progress bar
-refresh_rate: 10
+refresh_rate: 20
 
 model_ckpt:
   dirpath: ckpts/
   filename: "checkpoint-epoch{epoch}-step{step}-val_acc{val/acc:.3f}-val_loss{val/loss:.3f}"
   monitor: ${model.monitor}
   save_last: True
-  save_top_k: 2
+  save_top_k: 3
   mode: min
   auto_insert_metric_name: False
 
@@ -74,7 +88,7 @@ ddp_plugin:
 
 hydra:
   run:
-    dir: ./outputs/${name}-${model.name}/${now:%Y-%m-%d-%H-%M-%S}
+    dir: ./outputs3/${name}-${model.name}/${now:%Y-%m-%d-%H-%M-%S}
   sweep:
     dir: ./multirun/${name}-${model.name}
     subdir: ${now:%Y-%m-%d-%H-%M-%S}

@@ -5,6 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
+*.png
+*.jpg
+*.mp4
 
 # Distribution / packaging
 .Python
@@ -130,6 +133,8 @@ dmypy.json
 
 # Project based
 outputs/
+outputs2/
+outputs3/
 ckpts/
 logs/
 data/train/

@@ -10,7 +10,7 @@ import random
 import numpy as np
 
 ### seed
-seed = 42
+seed = 6789
 random.seed(seed)
 np.random.seed(seed)
 torch.manual_seed(seed)

@@ -53,8 +53,9 @@ class LivenessDatamodule(LightningDataModule):
         self.val_dataset = LivenessDataset(
             self.config.val_list,
             self.config.data_dir,
-            augment=False,
+            augment=True,
             crop_size=self.config.crop_size,
+            augment_config=self.config.augmentation,
         )
 
     def train_dataloader(self):
