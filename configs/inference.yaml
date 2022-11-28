@@ -1,12 +1,9 @@
 work_dir: ${hydra:runtime.cwd}
-# name: prob_2nd_best
-# checkpoint: outputs/baseline-tf_efficientnet_b4_ns/2022-11-06-13-06-47/ckpts/checkpoint-epoch4-step1310-val_acc0.992-val_loss0.017.ckpt
-# crop_size: 512
 
-name: baseline-tf_efficientnet_b4_ns
+name: baseline-swin_large_patch4_window12_384
 name_time: 2022-11-25-11-10-23
-checkpoint: ./outputs3/baseline-tf_efficientnet_b4_ns/2022-11-25-11-10-23/ckpts/last.ckpt
-crop_size: 512
+checkpoint: ./outputs3/last.ckpt
+crop_size: 384
 
 images_dir: data/public_test_2/images/*
 
