@@ -65,11 +65,6 @@ Run command to extract frames and split data. Then choose option 1 or 2 to creat
 cd data/
 unzip train.zip
 unzip public.zip
-<<<<<<< HEAD
-python get_frame.py -i train/videos/ -o train/pil_images/
-python get_frame.py -i public/videos/ -o public/pil_images/
-python create_data.py -dir train/ -l label.csv
-=======
 unzip public_test_2.zip
 python get_frame.py -i train/videos/ -o train/images/
 python get_frame.py -i public/videos/ -o public/images/
@@ -88,7 +83,6 @@ python get_frame.py -i train/videos/ -o train/padding_images/ -p
 python get_frame.py -i public/videos/ -o public/padding_images/ -p
 python get_frame.py -i public_test_2/videos/ -o public_test_2/padding_images/ -p
 python create_data.py -dir train/ -images padding_images -l label.csv
->>>>>>> 4521d35f8c8e752d8b6bbaea28b8f1a63866822d
 ```
 
 train_list: data/train/train.csv
@@ -108,4 +102,22 @@ Run:
 
 ```bash
 CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py -m
+```
+
+## Docker
+
+```bash
+docker run --gpus '"device=0"' --network host -it --name zac2022 pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime  /bin/bash
+
+apt update
+apt install software-properties-common
+add-apt-repository ppa:deadsnakes/ppa
+apt install python3.9
+apt install python3.9-distutils
+python3.9 -m pip install --upgrade pip
+python3.9 -m pip install --upgrade setuptools
+
+python3.9 -m pip install -r pip_evn.txt
+
+
 ```

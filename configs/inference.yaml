@@ -1,12 +1,12 @@
 work_dir: ${hydra:runtime.cwd}
 
 name: baseline-swin_large_patch4_window12_384
-name_time: 2022-11-25-11-10-23
-checkpoint: ./outputs3/last.ckpt
+checkpoint_s: ./weights/s/ckpts/last.ckpt
+checkpoint_h: ./weights/h/ckpts/checkpoint-epoch27-step8764-val_acc0.988-val_loss0.062.ckpt
 crop_size: 384
 
-images_dir: data/public_test_2/images/*
+videos_dir: /data/*
 
 hydra:
   run:
-    dir: ./outputs3/inference_${name}/${name_time}
+    dir: /result/

@@ -105,9 +105,9 @@ class SwinTransformerv2(nn.Module):
         return x
 
 class SwinTransformer(nn.Module):
-    def __init__(self, model_name, n_class=2, pretrained=True, drop_rate=0):
+    def __init__(self, model_name, n_class=2, pretrained=True, **kwargs):
         super().__init__()
-        backbone = timm.create_model(model_name, pretrained=pretrained, drop_rate=drop_rate)
+        backbone = timm.create_model(model_name, pretrained=pretrained, **kwargs)
         n_features = backbone.head.in_features
         self.backbone = backbone
         # print(self.backbone)
