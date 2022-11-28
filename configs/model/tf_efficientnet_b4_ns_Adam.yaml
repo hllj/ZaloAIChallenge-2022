@@ -1,19 +1,18 @@
-name: tf_efficientnet_b0_ns
+name: tf_efficientnet_b4_ns_Adam
 sync_dist: True # Use when training with multiple gpu
 arch:
   _target_: src.networks.EfficientNetB3DSPlus
   n_class: 2
-  model_name: tf_efficientnet_b0_ns
-  pretrained: True
+  model_name: tf_efficientnet_b4_ns
 monitor: "val/loss"
 loss:
   _target_: torch.nn.CrossEntropyLoss
-  label_smoothing: 0.0
+  label_smoothing: 0.1
 optimizer:
-  _target_: torch.optim.AdamW
-  lr: 3e-5
-  weight_decay: 1e-5
+  _target_: torch.optim.Adam
+  lr: 0.0003
+  weight_decay: 1.0e-5
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.StepLR
   step_size: 5
-  gamma: 0.2
+  gamma: 0.5

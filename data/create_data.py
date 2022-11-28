@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+seed = 4321
 
 def create_csv(fname, y, input_dir, images_dir, csv_filename):
     csv_file = open(os.path.join(input_dir, csv_filename), "w")
@@ -33,12 +34,12 @@ if __name__ == "__main__":
     fname_train, fname_val, y_train, y_val = train_test_split(
         label_df["fname"],
         label_df["liveness_score"],
-        test_size=0.33,
-        random_state=42,
+        test_size=0.2,
+        random_state=seed,
         stratify=label_df["liveness_score"],
     )
     print("train class count:", y_train.value_counts())
     print("val class count:", y_val.value_counts())
 
-    create_csv(fname_train, y_train, input_dir, images_dir, "train.csv")
-    create_csv(fname_val, y_val, input_dir, images_dir, "val.csv")
+    create_csv(fname_train, y_train, input_dir, images_dir, "train{}.csv".format(seed))
+    create_csv(fname_val, y_val, input_dir, images_dir, "val{}.csv".format(seed))

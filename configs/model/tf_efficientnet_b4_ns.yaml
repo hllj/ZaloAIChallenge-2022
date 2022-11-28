@@ -4,6 +4,7 @@ arch:
   _target_: src.networks.EfficientNetB3DSPlus
   n_class: 2
   model_name: tf_efficientnet_b4_ns
+  # pretrained: True
 monitor: "val/loss"
 loss:
   _target_: torch.nn.CrossEntropyLoss
@@ -15,4 +16,4 @@ optimizer:
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.StepLR
   step_size: 5
-  gamma: 0.5
+  gamma: 0.2

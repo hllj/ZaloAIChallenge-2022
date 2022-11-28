@@ -1,9 +1,9 @@
-name: tf_efficientnet_b0_ns
+name: resnet101d
 sync_dist: True # Use when training with multiple gpu
 arch:
-  _target_: src.networks.EfficientNetB3DSPlus
+  _target_: src.networks.ResNext
   n_class: 2
-  model_name: tf_efficientnet_b0_ns
+  model_name: resnet101d
   pretrained: True
 monitor: "val/loss"
 loss:
@@ -11,8 +11,8 @@ loss:
   label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 3e-5
-  weight_decay: 1e-5
+  lr: 3.0e-5
+  weight_decay: 1.0e-6
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.StepLR
   step_size: 5

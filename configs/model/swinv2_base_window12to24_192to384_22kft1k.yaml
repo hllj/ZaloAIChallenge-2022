@@ -5,14 +5,15 @@ arch:
   n_class: 2
   model_name: swinv2_base_window12to24_192to384_22kft1k
   pretrained: True
+monitor: val/loss
 loss:
   _target_: torch.nn.CrossEntropyLoss
   label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 3e-4
-  weight_decay: 1e-5
+  lr: 3.0e-5
+  weight_decay: 1.0e-6
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.StepLR
-  step_size: 20
-  gamma: 0.1
+  step_size: 5
+  gamma: 0.2

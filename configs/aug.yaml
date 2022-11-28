@@ -1,0 +1,43 @@
+name: baseline
+seed: 42
+
+# path to original working directory
+# hydra hijacks working directory by changing it to the current log directory,
+# so it's useful to have this path as a special variable
+# https://hydra.cc/docs/next/tutorials/basic/running_your_app/working_directory
+work_dir: ${hydra:runtime.cwd}
+defaults:
+  - _self_
+
+dataset:
+  data_list: ${work_dir}/data/train/val.csv
+  data_dir: ${work_dir}/data
+  save_dir: ${work_dir}/data/vis_val
+  save_list: ${work_dir}/data/vis_val/val.csv
+  crop_size: 512
+  is_aug: True 
+  augmentation:
+    aug0:
+      _target_: torchvision.transforms.RandomResizedCrop
+      size: 384
+      scale: 
+        - 0.35
+        - 1.0
+    aug1:
+      _target_: torchvision.transforms.RandomHorizontalFlip
+      p: 0.0
+    aug2:
+      _target_: torchvision.transforms.RandomVerticalFlip
+      p: 0.4
+    aug3:
+      _target_: torchvision.transforms.ColorJitter
+      brightness: 0.0
+      contrast: 0.2
+      saturation: 0.0
+      hue: 0.00
+    aug4:
+      _target_: torchvision.transforms.GaussianBlur
+      kernel_size: 3
+      sigma: 0.8
+    
+

@@ -16,15 +16,25 @@ class EfficientNetB3DSPlus(nn.Module):
             n_features = backbone.fc.in_features
         self.backbone = nn.Sequential(*backbone.children())[:-2]
         self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        self.dropout = nn.Dropout(0.5)
         self.classifier = nn.Linear(n_features, n_class)
 
     def forward_features(self, x):
         x = self.backbone(x)
         return x
 
+    # def forward(self, x):
+    #     x = self.forward_features(x)
+    #     # x = self.pool(x).view(x.size(0), -1)
+    #     x = self.dropout(x)
+    #     x = x.mean(dim=1)
+    #     x = self.classifier(x)
+    #     return x83794
+    
     def forward(self, x):
         feats = self.forward_features(x)
         x = self.pool(feats).view(x.size(0), -1)
+        x = self.dropout(x)
         x = self.classifier(x)
         return x
 
@@ -95,9 +105,9 @@ class SwinTransformerv2(nn.Module):
         return x
 
 class SwinTransformer(nn.Module):
-    def __init__(self, model_name, n_class=2, pretrained=True):
+    def __init__(self, model_name, n_class=2, pretrained=True, drop_rate=0):
         super().__init__()
-        backbone = timm.create_model(model_name, pretrained=pretrained)
+        backbone = timm.create_model(model_name, pretrained=pretrained, drop_rate=drop_rate)
         n_features = backbone.head.in_features
         self.backbone = backbone
         # print(self.backbone)

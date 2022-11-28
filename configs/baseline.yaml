@@ -12,14 +12,15 @@ logging:
   root: ./logs
 
 defaults:
-  - model: swin_base_patch4_window12_384
+  - model: tf_efficientnet_b4_ns
   - _self_
 
 dataset:
-  train_list: ${work_dir}/data/train/train.csv
-  val_list: ${work_dir}/data/train/val.csv
+  train_list: ${work_dir}/data/train/train4321.csv
+  val_list: ${work_dir}/data/train/val4321.csv
+  # val_list: ${work_dir}/data/vis_val/val.csv
   data_dir: ${work_dir}/data
-  crop_size: 384
+  crop_size: 512
   batch_size: 32
   num_workers: 4
   pin_memory: True
@@ -30,9 +31,15 @@ dataset:
       scale:
         - 0.49
         - 1.0
+      # ratio:
+      #   - 1.0
+      #   - 1.43
+    # aug1:
+    #   _target_: torchvision.transforms.RandomHorizontalFlip
+    #   p: 0.2
     aug1:
-      _target_: torchvision.transforms.RandomHorizontalFlip
-      p: 0.5
+      _target_: torchvision.transforms.RandomVerticalFlip
+      p: 0.2
     aug2:
       _target_: torchvision.transforms.GaussianBlur
       kernel_size: 3
@@ -40,17 +47,14 @@ dataset:
         - 0.2
         - 2.0
     # aug3:
-    #   _target_: torchvision.transforms.RandomVerticalFlip
-    #   p: 0.2
-    aug3:
-      _target_: torchvision.transforms.ColorJitter
-      brightness: 0.0
-      contrast: 0.2
-      saturation: 0.0
-      hue: 0.0
-    aug4:
-      _target_: torchvision.transforms.RandomPosterize
-      bits: 7
+    #   _target_: torchvision.transforms.ColorJitter
+    #   brightness: 0.0
+    #   contrast: 0.4
+    #   saturation: 0.0
+    #   hue: 0.0
+    # aug4:
+    #   _target_: torchvision.transforms.RandomPosterize
+    #   bits: 7
 
 trainer:
   # GPU related

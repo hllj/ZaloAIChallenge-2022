@@ -1,18 +1,19 @@
-name: tf_efficientnet_b0_ns
+name: swin_base_patch4_window12_384
 sync_dist: True # Use when training with multiple gpu
 arch:
-  _target_: src.networks.EfficientNetB3DSPlus
+  _target_: src.networks.SwinTransformer
   n_class: 2
-  model_name: tf_efficientnet_b0_ns
+  drop_rate: 0.1
+  model_name: swin_base_patch4_window12_384
   pretrained: True
-monitor: "val/loss"
+monitor: val/loss
 loss:
   _target_: torch.nn.CrossEntropyLoss
   label_smoothing: 0.0
 optimizer:
   _target_: torch.optim.AdamW
-  lr: 3e-5
-  weight_decay: 1e-5
+  lr: 3.0e-5
+  weight_decay: 1.0e-6
 lr_scheduler:
   _target_: torch.optim.lr_scheduler.StepLR
   step_size: 5
