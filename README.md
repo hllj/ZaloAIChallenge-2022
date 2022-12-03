@@ -110,7 +110,7 @@ apt install python3.9-distutils
 python3.9 -m pip install --upgrade pip
 python3.9 -m pip install --upgrade setuptools
 
-python3.9 -m pip install -r pip_evn.txt
+python3.9 -m pip install -r pip_env.txt
 
 docker run -it --gpus '"device=0"' --network host -v /storage/cv_hcm/zaloai2022/private_test/videos:/data -v /storage/cv_hcm/zaloai2022/result_private:/result zac2022:v2 /bin/bash  /code/predict.sh
 
