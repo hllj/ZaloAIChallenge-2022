@@ -1,117 +1,89 @@
-# PytorchLightning - Hydra - Wandb
+# Cài đặt
 
-This is a powerful and efficient template for training and testing ML models.
-
-## Installation
-
-Install the requirements by following the command:
-
+## Cài đặt pytorch
 ```bash
-cd $this_project_directory$
-conda env create -p $path_to_your_envs$ -f environment.yml
+pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --extra-index-url https://download.pytorch.org/whl/cu116
 ```
 
-## Usage
-
-PytorchLightning helps you handle all the residual things, such as assigning tensors to respective devices, creating training loop, running on ddp process if you pre-define numbers of GPUs.
-
-All you need to do in this template is **defining your model's architecture and training process**, **creating correct dataloaders** and **login to wandb** in order to visualize your results.
-
-### Login to Wandb
-
-After installing conda environment, run:
+## Cài đặt các library
 
 ```bash
-wandb login --relogin
+pip install -r pip_env.txt
 ```
 
-to login using your own account.
+## Cài đặt dữ liệu
 
-### Define your model and training process
-
-One best practice is creating a subfolder inside **src** for every model you want to train.
-
-Basically, a model needs at least 3 correspond files: **dataset.py**, **model.py**, **networks.py**.
-
-#### src/dataset.py
-
-This file helps define your dataset and dataloader.
-
-#### src/model.py
-
-Put your codes relating to your training and testing step here, including define your model, loss function, optimizer and so on.
-
-#### src/networks.py
-
-Put your network's architecture here.
-
-#### main.py
-
-The main file for running the process you have just defined above. We use hydra for importing config. Define your config path and config file name as kwargs of @hydra.main static function. Define your training process and validating process also. Define your visualization structure by editing the **LogPredictionSamplesCallback** function.
-
-#### configs/$your_config_name.yaml$
-
-Define the variables you need for running your model, including your model's hyperparams, dataset's hyperparams, optimizations, etc ...
-
-#### Add Zalo AI Challenge Dataset
-
-Download train.zip and public.zip, place in data/
-
-Run command to extract frames and split data. Then choose option 1 or 2 to create type of data (no padding or padding)
-
-#### Option 1: No padding, keep resolution
+### Bước 1:
+- Tải file train.zip để vào trong thư mục data/
+- Tiền xử lý dữ liệu: Cắt các frame với 1 frame/s.
+- Chia dữ liệu
 
 ```bash
 cd data/
 unzip train.zip
-unzip public.zip
-unzip public_test_2.zip
 python get_frame.py -i train/videos/ -o train/images/
-python get_frame.py -i public/videos/ -o public/images/
-python get_frame.py -i public_test_2/videos/ -o public_test_2/images/
-python create_data.py -dir train/ -images images_png -l label1.csv
+python create_data_h.py -dir train -images images -l label.csv
+python create_data_s.py -dir train -images images -l label.csv
 ```
 
-#### Option 2: Add padding, ratio 1:1
+### Bước 2: Tạo data augmentation cho tập train.
 
 ```bash
-cd data/
-unzip train.zip
-unzip public.zip
-unzip public_test_2.zip
-python get_frame.py -i train/videos/ -o train/padding_images/ -p
-python get_frame.py -i public/videos/ -o public/padding_images/ -p
-python get_frame.py -i public_test_2/videos/ -o public_test_2/padding_images/ -p
-python create_data.py -dir train/ -images padding_images -l label.csv
+cd ..
+python val_augmentation.py
 ```
 
-train_list: data/train/train.csv
-val_list: data/train/val.csv
+# Hướng tiếp cận
 
-## Running
+Team sử dụng 2 hướng tiếp cận chính:
 
-**Run**
+- Augmentation tập validation offline và giữ nguyên nó trong quá trình huấn luyện mô hình (mô hình h). Mục tiêu chính là team nhận thấy tập validation được sinh ra gần với tập public test 1 và 2 nhất và cho ra kết quả tốt nhất.
+
+- Augmentation cả tập train và validation online trong lúc huấn luyện (mô hình s). Mục tiêu chính là để lấy được mô hình tốt nhất trên nhiều không gian khác nhau.
+
+# Huấn luyện mô hình
+
+## Mô hình h
 
 ```bash
-CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py
+CUDA_VISIBLE_DEVICES=1 python main_h.py
 ```
 
+- Output sẽ là ở **outputs/h/ckpts**.
+- Ở đây team mình lựa chọn mô hình cho ra **val_acc** lớn nhất (được đánh giá là tốt nhất trên tập public 1 và 2).
 
-## Docker
+## Mô hình s
 
 ```bash
-docker run --gpus '"device=0"' --network host -it --name zac2022 pytorch/pytorch:1.12.1-cuda11.3-cudnn8-runtime  /bin/bash
+CUDA_VISIBLE_DEVICES=1 python main_s.py
+```
 
-apt update
-apt install software-properties-common
-add-apt-repository ppa:deadsnakes/ppa
-apt install python3.9
-apt install python3.9-distutils
-python3.9 -m pip install --upgrade pip
-python3.9 -m pip install --upgrade setuptools
+- Output sẽ là ở **outputs/s/ckpts**.
+- Ở đây team mình lựa chọn mô hình last.ckpt.
 
-python3.9 -m pip install -r pip_env.txt
+**Note**: Kết quả huấn luyện trên các device khác nhau có thể sai khác. Tụi mình đã có set seed và để CUDA Benchmark để mỗi lần huấn luyện là giống nhau trên 1 device.
 
-docker run -it --gpus '"device=0"' --network host -v /storage/cv_hcm/zaloai2022/private_test/videos:/data -v /storage/cv_hcm/zaloai2022/result_private:/result zac2022:v2 /bin/bash  /code/predict.sh
+# Inference
 
+```bash
+cp -r outputs/h weights/
+cp -r outputs/s weights/
+```
+
+Sửa lại file config ở trong configs/inference.yaml.
+
+```yaml
+checkpoint_s: <Path to s folder>
+checkpoint_h: <Path to h folder>
+videos_dir: private_test/videos/*
+
+hydra:
+  run:
+    dir: /result/
+```
+
+Chạy ensemble  cả 2 mô hình để predict.
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python predict.py
 ```
