@@ -24,7 +24,7 @@ from pytorch_lightning.loggers import WandbLogger
 from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
 
-from src.dataset import LivenessDatamodule
+from src.dataset_s import LivenessDatamodule
 from src.model_s import TIMMModel
 
 log = logging.getLogger(__name__)
