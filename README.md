@@ -33,6 +33,11 @@ cd ..
 python val_augmentation.py
 ```
 
+**Note**: ta có thể sử dụng bash file. 
+```bash
+bash process_data.sh
+```
+
 # Hướng tiếp cận
 
 Team sử dụng 2 hướng tiếp cận chính:
