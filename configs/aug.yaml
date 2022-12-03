@@ -10,19 +10,19 @@ defaults:
   - _self_
 
 dataset:
-  data_list: ${work_dir}/data/train/val.csv
+  data_list: ${work_dir}/data/train/val_8_2.csv
   data_dir: ${work_dir}/data
   save_dir: ${work_dir}/data/vis_val
   save_list: ${work_dir}/data/vis_val/val.csv
   crop_size: 512
-  is_aug: True 
+  is_aug: true
   augmentation:
     aug0:
       _target_: torchvision.transforms.RandomResizedCrop
       size: 384
-      scale: 
-        - 0.35
-        - 1.0
+      scale:
+      - 0.35
+      - 1.0
     aug1:
       _target_: torchvision.transforms.RandomHorizontalFlip
       p: 0.0
@@ -34,10 +34,8 @@ dataset:
       brightness: 0.0
       contrast: 0.2
       saturation: 0.0
-      hue: 0.00
+      hue: 0.0
     aug4:
       _target_: torchvision.transforms.GaussianBlur
       kernel_size: 3
       sigma: 0.8
-    
-

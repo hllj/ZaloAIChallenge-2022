@@ -111,10 +111,9 @@ class SwinTransformer(nn.Module):
         n_features = backbone.head.in_features
         self.backbone = backbone
         # print(self.backbone)
-        self.pool = nn.AdaptiveAvgPool2d((1, 1))
+        # self.pool = nn.AdaptiveAvgPool2d((1, 1))
         self.dropout = nn.Dropout(0.5)
         self.classifier = nn.Linear(n_features, n_class)
-
 
     def forward_features(self, x):
         x = self.backbone.forward_features(x)

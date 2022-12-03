@@ -25,7 +25,7 @@ from pytorch_lightning.strategies import DDPStrategy
 from torch.distributed.algorithms.ddp_comm_hooks import default_hooks as default
 
 from src.dataset import LivenessDatamodule
-from src.model import TIMMModel
+from src.model_s import TIMMModel
 
 log = logging.getLogger(__name__)
 
@@ -143,7 +143,7 @@ def train(config):
     wandb.finish()
 
 
-@hydra.main(config_path="configs", config_name="baseline")
+@hydra.main(config_path="configs", config_name="baseline_s")
 def main(config: DictConfig) -> None:
     log.info("Zalo AI Challenge - Liveness Detection")
     log.info(f"Current working directory : {Path.cwd()}")

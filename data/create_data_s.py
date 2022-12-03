@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-seed = 4321
+seed = 6789
 
 def create_csv(fname, y, input_dir, images_dir, csv_filename):
     csv_file = open(os.path.join(input_dir, csv_filename), "w")
@@ -41,5 +41,5 @@ if __name__ == "__main__":
     print("train class count:", y_train.value_counts())
     print("val class count:", y_val.value_counts())
 
-    create_csv(fname_train, y_train, input_dir, images_dir, "train{}.csv".format(seed))
-    create_csv(fname_val, y_val, input_dir, images_dir, "val{}.csv".format(seed))
+    create_csv(fname_train, y_train, input_dir, images_dir, "train{}_v2.csv".format(seed))
+    create_csv(fname_val, y_val, input_dir, images_dir, "val{}_v2.csv".format(seed))

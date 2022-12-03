@@ -1,6 +1,6 @@
 pytorch-lightning==1.7.7
 timm==0.6.11
-torchmetrics[image]
+torchmetrics[image]==0.10.2
 numpy
 wandb
 hydra-core==1.2.0
@@ -17,3 +17,4 @@ tqdm
 seaborn
 opencv-python
 jupyterlab
+scikit-learn

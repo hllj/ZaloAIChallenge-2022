@@ -1,0 +1,19 @@
+name: swin_large_patch4_window12_384
+sync_dist: True # Use when training with multiple gpu
+arch:
+  _target_: src.networks.SwinTransformer
+  n_class: 2
+  model_name: swin_large_patch4_window12_384
+  pretrained: True
+monitor: val/loss
+loss:
+  _target_: torch.nn.CrossEntropyLoss
+  label_smoothing: 0.0
+optimizer:
+  _target_: torch.optim.AdamW
+  lr: 3.0e-5
+  weight_decay: 1.0e-6
+lr_scheduler:
+  _target_: torch.optim.lr_scheduler.StepLR
+  step_size: 5
+  gamma: 0.2

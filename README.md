@@ -96,13 +96,6 @@ val_list: data/train/val.csv
 CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py
 ```
 
-**Multi config Running**
-Edit in hydra.sweeper.params in config/baseline.yaml
-Run:
-
-```bash
-CUDA_VISIBLE_DEVICES=$list_of_gpus_id$ python main.py -m
-```
 
 ## Docker
 
@@ -119,5 +112,6 @@ python3.9 -m pip install --upgrade setuptools
 
 python3.9 -m pip install -r pip_evn.txt
 
+docker run -it --gpus '"device=0"' --network host -v /storage/cv_hcm/zaloai2022/private_test/videos:/data -v /storage/cv_hcm/zaloai2022/result_private:/result zac2022:v2 /bin/bash  /code/predict.sh
 
 ```

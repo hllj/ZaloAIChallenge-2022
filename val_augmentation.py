@@ -24,8 +24,8 @@ OmegaConf.register_new_resolver("as_list", lambda x,y: [x, y])
 
 def get_image_transforms(input_size, augment_config=None, is_aug=False):
     transforms = []
-    transforms += [tvf.Resize([input_size, input_size])]
     if is_aug:
+        # transforms += [tvf.Resize([input_size, input_size])]
         for aug in augment_config:
             transforms += [hydra.utils.instantiate(augment_config[aug])]
     else:
@@ -39,6 +39,12 @@ def get_image_transforms(input_size, augment_config=None, is_aug=False):
 def transforms_func(image, config):
     transforms = get_image_transforms(config.dataset.crop_size, config.dataset.augmentation, config.dataset.is_aug)
     transforms_ori = get_image_transforms(config.dataset.crop_size, config.dataset.augmentation, False)
+    width, height = image.size
+    resize_transforms = tvf.Compose([
+        tvf.CenterCrop((int(0.75 * height), int(0.75 * width))),
+        tvf.Resize((int(0.375 * height), int(0.375 * width)))
+    ])
+    image = resize_transforms(image)
     if transforms is not None:
         image_tr = transforms(image)
     if transforms_ori is not None:
@@ -73,7 +79,8 @@ def aug(config):
         path_ori = filename + '_ori' + file_extension
         save_path_ori = os.path.join(config.dataset.save_dir, path_ori)
         image_ori.save(save_path_ori)
-
+        path = os.path.join(os.path.basename(config.dataset.save_dir), path)
+        path_ori = os.path.join(os.path.basename(config.dataset.save_dir), path_ori)
         new_paths.extend([path,path_ori])
         new_labels.extend([label,label])
     
@@ -81,7 +88,7 @@ def aug(config):
     {'fname': new_paths,
      'liveness_score': new_labels
     })
-    out_df.to_csv(config.dataset.save_list)
+    out_df.to_csv(config.dataset.save_list, index=False)
 
 @hydra.main(config_path="configs", config_name="aug")
 def main(config: DictConfig) -> None:
